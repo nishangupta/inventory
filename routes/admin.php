@@ -21,12 +21,11 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin']],function()
   
   Route::resource('/customer',CustomerController::class);
 
-  Route::resource('/purchase',PurchaseController::class);
-
   Route::resource('/sale',SaleController::class);
+  Route::get('/sale/printInvoice/{id}',[SaleController::class,'printInvoice'])->name('sale.printInvoice');
 
   Route::resource('/category',CategoryController::class);
-  
+
   Route::resource('/expense',ExpenseController::class);
 
   Route::get('/admin-password',[AdminPasswordController::class,'index'])->name('admin-password.index');

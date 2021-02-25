@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="">Total price</label>
-                  <input type="text" name="price" placeholder="Price" value="{{$sale->price??old('price')}}" class="form-control" >
+                  <label for="">Price</label>
+                  <input type="text" name="price" placeholder="Price" value="{{$sale->price / $sale->unit??old('price')}}" class="form-control" >
                 </div>
 
                 <div class="form-group">
@@ -60,6 +60,15 @@
                   </select>
                 </div>
 
+                <div class="form-group">
+                  <label for="">Customer Name</label>
+                  <input type="text" name="customer_name" placeholder="" value="{{$sale->customer_name??old('customer_name')}}" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                  <label for="">Customer Email (optional)</label>
+                  <input type="text" name="customer_email" placeholder="" value="{{$sale->customer_email??old('customer_email')}}" class="form-control" >
+                </div>
 
                 <br>
                 

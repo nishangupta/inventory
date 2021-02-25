@@ -39,8 +39,8 @@
                 <tr>
                   <th>Sn</th>
                   <th>Title</th>
-                  <th>Category</th>
                   <th>Price</th>
+                  <th>Category</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>

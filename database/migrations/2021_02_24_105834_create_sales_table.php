@@ -20,7 +20,9 @@ class CreateSalesTable extends Migration
             $table->text('description')->nullable();
             $table->integer('unit');
             $table->string('price');
-            $table->timestamps();
+            $table->string('customer_name')->nullable();
+            $table->string('customer_email')->nullable();
+            $table->timestamps();   
         });
     }
 

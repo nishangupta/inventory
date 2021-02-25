@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="">Total price</label>
+                  <label for="">Price</label>
                   <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
                 </div>
 
@@ -57,6 +57,16 @@
                     <option value="{{$product->id}}">{{$product->title}} - {{$product->actualPrice}}</option>
                     @endforeach
                   </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="">Customer Name</label>
+                  <input type="text" name="customer_name" placeholder="" value="{{old('customer_name')}}" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                  <label for="">Customer Email (optional)</label>
+                  <input type="text" name="customer_email" placeholder="" value="{{old('customer_email')}}" class="form-control" >
                 </div>
 
                 <br>

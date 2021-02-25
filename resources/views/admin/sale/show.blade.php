@@ -28,6 +28,7 @@
           <div class="card card-outline card-primary">
             <div class="card-header">
               <h3 class="card-title">{{$sale->title}}</h3>
+              <a href="{{route('sale.printInvoice',$sale->id)}}" target="_blank" class="btn btn-primary btn-sm float-right">Print invoice</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -36,22 +37,17 @@
               <div class="row">
                 <div class="col-12 col-md-6">
                   <div class="mb-3">
-                    <p>Description: {!!$sale->description!!}</p>
-                  </div>
-                  <hr>
-
-                  <div class="mb-3">
                     <p>Product Title: {{$sale->product->title}} </p>
                   </div>
 
                   <div class="mb-3">
-                    <p>Total Price: Rs {{$sale->price}}</p>
+                    <p>Unit: {{$sale->unit}}</p>
                   </div>
                   
                   <div class="mb-3">
-                    <p>Unit: {{$sale->unit}}</p>
+                    <p>Total Price: Rs {{$sale->price}}</p>
                   </div>
-
+                  
                   <div class="mb-3">
                     <p>Created at: {{$sale->created_at}}</p>
                   </div>
@@ -66,12 +62,17 @@
                       @csrf @method('delete')
                       <button type="submit" class="dltBtn btn btn-danger">Delete</button>
                     </form>
+  
                   </div>
                   
                 </div>
 
                 <div class="col-12 col-md-6">
-              </div>
+                  <div class="mb-3">
+                    <p>Description: {!!$sale->description!!}</p>
+                  </div>
+                  <hr>
+                </div>
             
             </div>
             <!-- /.card-body -->

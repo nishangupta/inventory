@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Expense;
 use Illuminate\Database\Seeder;
 
-class ExpenseSeeder extends Seeder
+class SaleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,7 +23,7 @@ class ExpenseSeeder extends Seeder
           ];
       
           foreach ($items as $item) {
-            $product =  Expense::create([
+            $product =  Sale::create([
               'title' => $item['title'],
               'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nobis mollitia consequuntur, fugit corporis sapiente, incidunt, provident quae nemo eum quidem! Facere qui voluptas molestias voluptatibus ullam recusandae, perferendis repellat!,',
               'price'=>'5000',

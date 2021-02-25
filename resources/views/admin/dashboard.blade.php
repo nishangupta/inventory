@@ -29,14 +29,14 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>5300<sup style="font-size: 20px">Rs</sup></h3>
+              <h4>Rs {{number_format($totalIncome)}}</h4>
 
               <p>Sales</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="fas fa-coins"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('sale.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -44,14 +44,14 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>2300<sup style="font-size: 20px">Rs</sup></h3>
+              <h4>Rs {{number_format($totalExpense)}}</h4>
 
               <p>Expenses</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fas fa-wallet"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('expense.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -59,12 +59,12 @@
           <!-- small box -->
           <div class="small-box bg-navy">
             <div class="inner">
-              <h3>2300<sup style="font-size: 20px">Rs</sup></h3>
+              <h4>Rs {{number_format($totalProfit)}}</h4>
 
               <p>Profit</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fas fa-money-bill-wave"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -74,12 +74,12 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h4>65</h4>
 
               <p>Unique Visitors</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="fas fa-user-friends"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -87,15 +87,12 @@
         <!-- ./col -->
       </div>
       
-      
-      
-      
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box shadow-hover">
-              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-book-open"></i></span>
+              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-cubes"></i></span>
               <div class="info-box-content">
-                <a href="route('course.index')}}">
+                <a href="{{route('product.index')}}">
                   <span class="info-box-text text-dark">Products</span>
                   <span class="info-box-number text-dark">
                       {{$productCount}}
@@ -109,13 +106,13 @@
         
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box shadow-hover">
-            <span class="info-box-icon bg-green elevation-1"><i class="fas fa-chalkboard-teacher"></i></span>
+            <span class="info-box-icon bg-green elevation-1"><i class="fas fa-user-friends"></i></span>
 
             <div class="info-box-content">
-              <a href="{route('exam.index')}}">
+              <a href="{{route('customer.index')}}">
                 <span class="info-box-text text-dark">Customers</span>
                 <span class="info-box-number text-dark">
-                  {{$expenseCount}}
+                  {{$customerCount}}
                 </span>
               </a>
             </div>
@@ -127,12 +124,12 @@
 
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box mb-3 shadow-hover">
-            <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-globe-americas"></i></span>
+            <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-user-shield"></i></span>
 
             <div class="info-box-content">
-              <a href="{route('country.index')}}">
+              <a href="{{route('usermanagement.index')}}">
                 <span class="info-box-text text-dark">Admins</span>
-                <span class="info-box-number text-dark">{{$incomeCount}}</span>
+                <span class="info-box-number text-dark">{{$adminCount}}</span>
               </a>
             </div>
           </div>
