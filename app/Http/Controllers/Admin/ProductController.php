@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::all();
+        $products = Product::with('productCategory')->get();
         return view('admin.product.index',compact('products'));
     }
 
     public function create(){
-        return view('admin.product.create');
+        $categories = ProductCategory::all();
+        return view('admin.product.create',compact('categories'));
     }
 
     public function store(Request $request){
@@ -22,14 +24,16 @@ class ProductController extends Controller
             'title'=>'required|min:3',
             'description'=>'nullable',
             'price'=>'required',
-            'discount'=>'nullable'
+            'product_category_id'=>'required',
+            'qty'=>'required',
         ]);
 
         $product = Product::create([
             'title'=>$request->title,
             'description'=>$request->description,
             'price'=>$request->price,
-            'discount'=>$request->discount
+            'product_category_id'=>$request->product_category_id,
+            'qty'=>$request->qty
         ]);
 
         return redirect()->route('product.index')->with('success','Product created!');
@@ -39,8 +43,15 @@ class ProductController extends Controller
         return view('admin.product.show',compact('product'));
     }
 
+    //searching for product
+    public function search(Request $request){
+        $products = Product::where($request->type,'LIKE','%'.$request->term.'%')->get();
+        return $products;
+    }
+
     public function edit(Product $product){
-        return view('admin.product.edit',compact('product'));
+        $categories = ProductCategory::all();
+        return view('admin.product.edit',compact('product','categories'));
     }
 
     public function update(Request $request,Product $product){
@@ -48,14 +59,16 @@ class ProductController extends Controller
             'title'=>'required|min:3',
             'description'=>'nullable',
             'price'=>'required',
-            'discount'=>'nullable'
+            'product_category_id'=>'required',
+            'qty'=>'required'
         ]);
 
         $product->update([
             'title'=>$request->title,
             'description'=>$request->description,
             'price'=>$request->price,
-            'discount'=>$request->discount
+            'product_category_id'=>$request->product_category_id,
+            'qty'=>$request->qty
         ]);
         
         return redirect(route('product.index'))->with('success','Product updated!');
@@ -64,6 +77,5 @@ class ProductController extends Controller
     public function destroy(Product $product){
         $product->delete();
         return redirect()->route('product.index')->with('success','Product deleted');
-
     }
 }

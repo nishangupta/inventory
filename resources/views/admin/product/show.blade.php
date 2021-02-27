@@ -45,9 +45,9 @@
                   </div>
     
                   <div class="mb-3">
-                    <p>Discount: {{$product->discount}}</p>
+                    <p>Units/Qty: {{$product->qty}}</p>
                   </div>
-    
+                  
                   <div class="mb-3">
                     <p>Created at: {{$product->created_at}}</p>
                   </div>

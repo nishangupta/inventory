@@ -43,22 +43,17 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="" >Email*</label>
-                  <input type="email" name="email" placeholder="email" value="{{old('email')}}" class="form-control"  required>
+                  <label for="" >Email</label>
+                  <input type="email" name="email" placeholder="email" value="{{old('email')}}" class="form-control" >
                 </div>
                 
                 <div class="my-2">
-                  <label for="">Password*</label>
-                  <input type="password" name="password" placeholder="password" class="form-control" required >
-                </div>
-
-                <div class="my-2">
-                  <label for="">Phone (optional)</label>
+                  <label for="">Phone</label>
                   <input type="text" name="phone" placeholder="phone" class="form-control" >
                 </div>
 
                 <div class="my-2">
-                  <label for="">Address (optional)</label>
+                  <label for="">Address</label>
                   <input type="text" name="address" placeholder="address" class="form-control" >
                 </div>
                 

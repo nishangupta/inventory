@@ -38,11 +38,11 @@
                 <thead>
                 <tr>
                   <th>Sn</th>
-                  <th>Title</th>
-                  <th>Total Price</th>
-                  <th>Unit</th>
-                  <th>Product</th>
-                  <th>Created at</th>
+                  <th>Customer</th>
+                  <th>Total Amount</th>
+                  <th>Due</th>
+                  <th>Paid</th>
+                  <th>Sold at</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -50,11 +50,11 @@
                   @foreach($sales as $sale)
                   <tr>
                     <td>{{$sale->id}}</td>
-                    <td><a href="{{route('sale.show',$sale->id)}}">{{$sale->title}}</a></td>
-                    <td>{{$sale->price}}</td>
-                    <td>{{$sale->unit}}</td>
-                    <td>{{$sale->product->title}}</td>
-                    <td>{{$sale->created_at->format('Y m d')}}</td>
+                    <td><a href="{{route('sale.show',$sale->id)}}">{{$sale->customer->name}}</a></td>
+                    <td>{{$sale->total_amount}}</td>
+                    <td>{{$sale->due_amount}}</td>
+                    <td>{{$sale->paid_amount}}</td>
+                    <td>{{$sale->created_at->format('Y/m/d')}}</td>
                     <td>
                       <a href="{{route('sale.edit',$sale)}}" class="btn btn-sm btn-info">Edit</a>
                       <form action="{{route('sale.destroy',$sale)}}" method="POST">

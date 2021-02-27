@@ -29,9 +29,10 @@ class ProductSeeder extends Seeder
       
           foreach ($items as $item) {
             $product =  Product::create([
+              'product_category_id'=>1,
               'title' => $item['title'],
               'price'=>'5000',
-              'discount'=>'10',
+              'qty'=>'10',
               'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo voluptate optio molestiae tempora deleniti cupiditate, nihil ad doloremque obcaecati ex.'
             ]);
           }

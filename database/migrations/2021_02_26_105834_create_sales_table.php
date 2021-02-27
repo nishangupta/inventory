@@ -15,13 +15,15 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->integer('unit');
-            $table->string('price');
-            $table->string('customer_name')->nullable();
-            $table->string('customer_email')->nullable();
+            $table->foreignId('customer_id')->constrained();
+            $table->text('details')->nullable();
+            $table->string('sub_total');
+            $table->string('tax_amount')->default(0);
+            $table->string('total_amount');
+            $table->string('paid_amount');
+            $table->string('discount_amount')->default(0);
+            $table->string('due_amount')->default(0);
+            $table->boolean('status')->default(false);
             $table->timestamps();   
         });
     }

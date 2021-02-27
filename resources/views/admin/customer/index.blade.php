@@ -27,7 +27,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Customers</h3>
-              {{-- <a href="{{route('customer.create')}}" class="btn btn-primary btn-sm float-right">Create</a> --}}
+              <a href="{{route('customer.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -47,17 +47,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($users as $user)
+                  @foreach($customers as $customer)
                   <tr>
-                    <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>{{$user->phone}}</td>
-                    <td>{{$user->address}}</td>
-                    <td>{{$user->created_at->format('Y m d')}}</td>
+                    <td>{{$customer->id}}</td>
+                    <td>{{$customer->name}}</td>
+                    <td>{{$customer->email}}</td>
+                    <td>{{$customer->phone}}</td>
+                    <td>{{$customer->address}}</td>
+                    <td>{{$customer->created_at->format('Y m d')}}</td>
                     <td>
-                      {{-- <a href="{{route('customer.edit',$user)}}" class="btn btn-sm btn-info float-left">Edit</a> --}}
-                      <form action="{{route('customer.destroy',$user)}}" method="POST" class="float-left">
+                      <a href="{{route('customer.edit',$customer)}}" class="btn btn-sm btn-info float-left">Edit</a>
+                      <form action="{{route('customer.destroy',$customer)}}" method="POST" class="float-left">
                         @csrf @method('delete')
                         <button class="btn dltBtn btn-danger btn-sm">Delete</button>
                       </form>

@@ -39,8 +39,9 @@
                 <tr>
                   <th>Sn</th>
                   <th>Title</th>
+                  <th>Category</th>
                   <th>Price</th>
-                  <th>Discount%</th>
+                  <th>Qty</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
@@ -50,8 +51,9 @@
                   <tr>
                     <td>{{$product->id}}</td>
                     <td><a href="{{route('product.show',$product->id)}}">{{$product->title}}</a></td>
+                    <td>{{$product->productCategory->title}}</td>
                     <td>{{$product->price}}</td>
-                    <td>{{$product->discount}}</td>
+                    <td>{{$product->qty}}</td>
                     <td>{{$product->created_at->format('Y m d')}}</td>
                     <td>
                       <a href="{{route('product.edit',$product)}}" class="btn btn-sm btn-info">Edit</a>

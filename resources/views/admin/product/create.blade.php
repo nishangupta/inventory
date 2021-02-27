@@ -41,29 +41,25 @@
                   <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
                 </div>
                 
-                <div class="row">
-                  <div class="col-12 col-md-6">
-                    <div class="form-group">
-                      <label for="" >Price</label>
-                      <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <div class="form-group">
-                      <label for="" >Discount %</label>
-                      <input type="text" name="discount" placeholder="Discount" value="{{old('discount')}}" class="form-control">
-                    </div>
-                  </div>
+                <div class="form-group">
+                  <label for="" >Price</label>
+                  <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
                 </div>
 
-                {{-- <div class="my-2">
-                  <label for="">Cover image for the country</label>
+                <div class="form-group">
+                  <label for="" >Qty</label>
+                  <input type="text" name="qty" placeholder="Qty" value="{{old('qty')}}" class="form-control">
+                </div>
 
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="cover" >
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                  </div>
-                </div> --}}
+                <div class="form-group">
+                  <label for="" >Product Category</label>
+
+                  <select name="product_category_id" class="form-control">
+                    @foreach($categories as $category)
+                      <option value="{{$category->id}}">{{$category->title}}</option>
+                    @endforeach
+                  </select>
+                </div>
 
                 <br>
                 

@@ -16,7 +16,7 @@ class AdminController extends Controller
         $customerCount = User::role('user')->count();
         $adminCount = User::role('admin')->count();
         
-        $totalIncome = Sale::sum('price');
+        $totalIncome = Sale::sum('paid_amount');
         $totalExpense = Expense::sum('price');
         $totalProfit = $totalIncome - $totalExpense;
         

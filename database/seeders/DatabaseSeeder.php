@@ -17,10 +17,13 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
 
+            ProductCategorySeeder::class,
             ProductSeeder::class,
             CategorySeeder::class,
             ExpenseSeeder::class,
             SaleSeeder::class,
+            SupplierSeeder::class,
+            CustomerSeeder::class,
         ]);
     }
 }

@@ -8,8 +8,11 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\AdminPasswordController;
+use App\Http\Controllers\Admin\ProductSearchController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 
 //Admin routes exits here
 Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin']],function(){
@@ -17,9 +20,14 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin']],function()
   Route::get('/',[AdminController::class,'index'])->name('admin.index');
   Route::resource('/usermanagement',UserManagementController::class);
 
+  Route::resource('/product-category',ProductCategoryController::class);
+  
+  Route::get('/product/search',[ProductController::class,'search'])->name('product.search');
   Route::resource('/product',ProductController::class);
   
   Route::resource('/customer',CustomerController::class);
+
+  Route::resource('/supplier',SupplierController::class);
 
   Route::resource('/sale',SaleController::class);
   Route::get('/sale/printInvoice/{id}',[SaleController::class,'printInvoice'])->name('sale.printInvoice');

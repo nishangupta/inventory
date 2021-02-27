@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -13,5 +14,9 @@ class Product extends Model
 
     public function getActualPriceAttribute(){
         return $this->discount ? $this->price - ($this->price * $this->discount / 100):$this->price; 
+    }
+
+    public function productCategory(){
+        return $this->belongsTo(ProductCategory::class);
     }
 }

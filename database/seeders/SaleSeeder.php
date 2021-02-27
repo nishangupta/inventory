@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sale;
 use Illuminate\Database\Seeder;
 
 class SaleSeeder extends Seeder
@@ -13,6 +14,7 @@ class SaleSeeder extends Seeder
      */
     public function run()
     {
+      return ;
         $items = [
             [
               'title' => 'Raw materials',
@@ -26,8 +28,10 @@ class SaleSeeder extends Seeder
             $product =  Sale::create([
               'title' => $item['title'],
               'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nobis mollitia consequuntur, fugit corporis sapiente, incidunt, provident quae nemo eum quidem! Facere qui voluptas molestias voluptatibus ullam recusandae, perferendis repellat!,',
-              'price'=>'5000',
-              'category_id'=>1,
+              'unit'=>'2',
+              'price'=>'9000',
+              'customer_id'=>'1',
+              'product_id'=>1,
             ]);
           }
     }
