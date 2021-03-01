@@ -36,36 +36,64 @@
 
               <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                  <label for="" >Title</label>
-                  <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                  <label for="" >Price</label>
-                  <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Title</label>
+                      <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Cost Price</label>
+                      <input type="text" name="cost_price" placeholder="Cost Price" value="{{old('cost_price')}}"  required class="form-control" >
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="" >Qty</label>
-                  <input type="text" name="qty" placeholder="Qty" value="{{old('qty')}}" class="form-control">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="" >Type</label>
+                      <select name="type" class="form-control" id="">
+                        <option value="fixed">Fixed</option>
+                        <option value="percent">Percent</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="">Margin Value</label>
+                      <input type="text" name="margin" placeholder="margin" value="{{old('margin')}}" required class="form-control" >
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="" >Product Category</label>
-
-                  <select name="product_category_id" class="form-control">
-                    @foreach($categories as $category)
-                      <option value="{{$category->id}}">{{$category->title}}</option>
-                    @endforeach
-                  </select>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Qty</label>
+                      <input type="text" name="qty" placeholder="Qty" value="{{old('qty')}}" required  class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Product Category</label>
+    
+                      <select name="product_category_id" class="form-control">
+                        @foreach($categories as $category)
+                          <option value="{{$category->id}}">{{$category->title}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
                 <br>
                 
                 <div class="form-group">
                   <label for="">Description</label>
-                  <textarea class="textarea form-control" name="description" placeholder="Short Description here">{{ old('description')}}</textarea>
+                  <textarea class="textarea form-control" name="description">{{ old('description')}}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>

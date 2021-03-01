@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,10 +28,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('inc.admin.navbar', function ($view) {
+        if(!Cache::has('settings')){
+            Cache::remember('settings',7200,function(){
+                return DB::table('settings')->get();
+            });
+        }
+
+        View::composer('admin.*', function ($view) {
+            $settings = cache('settings');
             $view->with([
-                // 'notiCount' => auth()->user()->unreadNotifications()->count(),
-                'notiCount' => 1,
+                'NAME'=>$settings->where('title','name')->first(),
+                'EMAIL'=>$settings->where('title','email')->first(),
+                'ADDRESS'=>$settings->where('title','address')->first(),
+                'PHONE'=>$settings->where('title','phone')->first(),
+                'LOGO'=>$settings->where('title','logo')->first(),
             ]);
         });   
 

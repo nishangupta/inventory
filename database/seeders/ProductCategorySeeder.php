@@ -16,15 +16,11 @@ class ProductCategorySeeder extends Seeder
     {
         $items = [
             [
-              'title' => 'Category1',
+              'title' => 'Battery',
             ],
             [
               'title' => 'Category2',
             ],
-            [
-              'title' => 'Category3',
-            ],
-              
           ];
       
           foreach ($items as $item) {

@@ -33,19 +33,28 @@
               <x-input-error />
               <x-alert-msg/>
 
-              <div class="form-group focused">
-                <label for="">Username</label>
-
-                <input type="text"  class="form-control form-control-alternative" disabled
-                  placeholder="Username" value="{{auth()->user()->name}}">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group focused">
+                    <label for="">Username</label>
+    
+                    <input type="text"  class="form-control form-control-alternative" disabled
+                      placeholder="Username" value="{{auth()->user()->name}}">
+                  </div>
+    
+                </div>
+                <div class="col-sm-12 col-md-6">
+                 
+                  <div class="form-group focused">
+                    <label for="">Email</label>
+    
+                    <input type="text"  class="form-control form-control-alternative" disabled
+                      placeholder="Email" value="{{auth()->user()->email}}">
+                  </div>
+                  
+                </div>
               </div>
-              <div class="form-group focused">
-                <label for="">Email</label>
-
-                <input type="text"  class="form-control form-control-alternative" disabled
-                  placeholder="Email" value="{{auth()->user()->email}}">
-              </div>
-
+             
               <br>
               <hr>
               <br>

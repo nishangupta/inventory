@@ -23,14 +23,22 @@ class SaleController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());
-        
         $request->validate([
+            'qty.*'=>'required|gt:0',
             'customer_id'=>'required',
             'details'=>'nullable',
-            'paid_amount'=>'required',
             'discount_amount'=>'max:191',
+            'payment_type'=>'required',
+            'chq_no'=>'',
+            'chq_date'=>'',
         ]);
+
+        if($request->payment_type == 'bank'){    
+            $request->validate([
+                'chq_no'=>'required',
+                'chq_date'=>'required',
+            ]);
+        }
 
         if($request->paid_amount>0){
             $status = 1;
@@ -42,12 +50,17 @@ class SaleController extends Controller
             'customer_id'=>$request->customer_id,
             'details'=>$request->details,
             'sub_total'=>$request->sub_total,
+            'tax_rate'=>$request->tax_rate,
             'tax_amount'=>$request->tax_amount,
+            'discount_rate'=>$request->discount_rate,
             'discount_amount'=>$request->discount_amount,
             'total_amount'=>$request->total_amount,
             'paid_amount'=>$request->paid_amount,
             'due_amount'=>$request->due_amount,
             'status'=>$status,
+            'payment_type'=>$request->payment_type,
+            'chq_no'=>$request->chq_no,
+            'chq_date'=>$request->chq_date,
         ];
 
         $sale = Sale::firstOrCreate($data);
@@ -93,13 +106,21 @@ class SaleController extends Controller
     }
 
     public function update(Request $request,$sale){
+
         $request->validate([
             'qty.*'=>'required|gt:0',
             'details'=>'nullable',
             'customer_id'=>'required',
-            'paid_amount'=>'required',
             'discount_amount'=>'max:191',
+            'payment_type'=>'required'
         ]);
+
+        if($request->payment_type == 'bank'){    
+            $request->validate([
+                'chq_no'=>'required',
+                'chq_date'=>'required',
+            ]);
+        }
         
         if($request->paid_amount>0){
             $status = 1;
@@ -111,12 +132,17 @@ class SaleController extends Controller
             'customer_id'=>$request->customer_id,
             'details'=>$request->details,
             'sub_total'=>$request->sub_total,
+            'tax_rate'=>$request->tax_rate,
             'tax_amount'=>$request->tax_amount,
+            'discount_rate'=>$request->discount_rate,
             'discount_amount'=>$request->discount_amount,
             'total_amount'=>$request->total_amount,
             'paid_amount'=>$request->paid_amount,
             'due_amount'=>$request->due_amount,
             'status'=>$status,
+            'payment_type'=>$request->payment_type,
+            'chq_no'=>$request->chq_no,
+            'chq_date'=>$request->chq_date,
         ];
 
         $sale = Sale::whereKey($sale)->with('saleProducts')->first();   

@@ -50,7 +50,7 @@
                   @foreach($customers as $customer)
                   <tr>
                     <td>{{$customer->id}}</td>
-                    <td>{{$customer->name}}</td>
+                    <td><a href="{{route('customer.show',$customer->id)}}">{{$customer->name}}</a></td>
                     <td>{{$customer->email}}</td>
                     <td>{{$customer->phone}}</td>
                     <td>{{$customer->address}}</td>
@@ -65,7 +65,7 @@
                   </tr>
                   @endforeach
                 </tbody>
-              {{-- {{$countries->links()}} --}}
+              </table>
             </div>
             <!-- /.card-body -->
           </div>

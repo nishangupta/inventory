@@ -23,20 +23,38 @@ class ProductController extends Controller
         $request->validate([
             'title'=>'required|min:3',
             'description'=>'nullable',
-            'price'=>'required',
+            'cost_price'=>'required',
             'product_category_id'=>'required',
             'qty'=>'required',
+            'type'=>'required',
+            'margin'=>'required',
         ]);
+
+        switch($request->type){
+            case "fixed":
+                $price = $request->cost_price + $request->margin;
+                break;
+            case "percent":
+                $price = $request->cost_price + ($request->margin / 100) * $request->cost_price;
+                break;
+
+            default:
+                $price = $request->cost_price + $request->margin;
+        }
+        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
 
         $product = Product::create([
             'title'=>$request->title,
             'description'=>$request->description,
-            'price'=>$request->price,
+            'cost_price'=>$request->cost_price,
+            'price'=>$price, //selling price
             'product_category_id'=>$request->product_category_id,
-            'qty'=>$request->qty
+            'qty'=>$request->qty,
+            'type'=>$request->type,
+            'margin'=>$request->margin
         ]);
 
-        return redirect()->route('product.index')->with('success','Product created!');
+        return redirect()->route('product.show',$product->id)->with('success','Product created!');
     }
     
     public function show(Product $product){
@@ -45,7 +63,7 @@ class ProductController extends Controller
 
     //searching for product
     public function search(Request $request){
-        $products = Product::where($request->type,'LIKE','%'.$request->term.'%')->get();
+        $products = Product::where('title','LIKE','%'.$request->term.'%')->get();
         return $products;
     }
 
@@ -58,17 +76,36 @@ class ProductController extends Controller
         $request->validate([
             'title'=>'required|min:3',
             'description'=>'nullable',
-            'price'=>'required',
+            'cost_price'=>'required',
             'product_category_id'=>'required',
-            'qty'=>'required'
+            'qty'=>'required',
+            'type'=>'required',
+            'margin'=>'required'
         ]);
+
+        switch($request->type){
+            case "fixed":
+                $price = $request->cost_price + $request->margin;
+                break;
+            case "percent":
+                $price = $request->cost_price + ($request->margin / 100) * $request->cost_price;
+                break;
+
+            default:
+                $price = $request->cost_price + $request->margin;
+        }
+
+        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
 
         $product->update([
             'title'=>$request->title,
             'description'=>$request->description,
-            'price'=>$request->price,
+            'cost_price'=>$request->cost_price,
+            'price'=>$price,
             'product_category_id'=>$request->product_category_id,
-            'qty'=>$request->qty
+            'qty'=>$request->qty,
+            'type'=>$request->type,
+            'margin'=>$request->margin
         ]);
         
         return redirect(route('product.index'))->with('success','Product updated!');

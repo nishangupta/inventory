@@ -14,19 +14,19 @@ class SaleSeeder extends Seeder
      */
     public function run()
     {
-      return ;
+      return;
         $items = [
             [
               'title' => 'Raw materials',
             ],
             [
-                'title' => 'Electricity',
+              'title' => 'Electricity',
             ],
           ];
       
           foreach ($items as $item) {
             $product =  Sale::create([
-              'title' => $item['title'],
+              'customer_id' => $item['1'],
               'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nobis mollitia consequuntur, fugit corporis sapiente, incidunt, provident quae nemo eum quidem! Facere qui voluptas molestias voluptatibus ullam recusandae, perferendis repellat!,',
               'unit'=>'2',
               'price'=>'9000',

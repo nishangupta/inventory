@@ -16,10 +16,10 @@ class SupplierSeeder extends Seeder
     {
         $items = [
             [
-              'name' => 'Sushan',
+              'name' => 'Bk traders',
             ],
             [
-              'name' => 'Amin',
+              'name' => 'Test Supplier',
             ],
           ];
       

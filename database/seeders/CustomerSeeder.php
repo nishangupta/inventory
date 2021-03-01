@@ -15,25 +15,24 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         $items = [
-            [
-              'name' => 'Sushan',
-            ],
-            [
-                'name' => 'Amin',
-              ],
-            
-              [
-                'name' => 'Manihs',
-              ],
-            
-              [
-                'name' => 'Sujan',
-              ],
-              
-              [
-                'name' => 'Mukesh',
-              ],
-          ];
+          [
+            'name' => 'Amin',
+          ],
+          [
+            'name' => 'Sushan',
+          ],
+          [
+            'name' => 'Manish',
+          ],
+        
+          [
+            'name' => 'Sujan',
+          ],
+          
+          [
+            'name' => 'Mukesh',
+          ],
+        ];
       
           foreach ($items as $item) {
             $customer =  Customer::create([

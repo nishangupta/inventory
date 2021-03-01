@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Product Category</h1>
+          <h1>Quotation</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item active">Product Category</li>
+            <li class="breadcrumb-item active">Quotation</li>
           </ol>
         </div>
       </div>
@@ -26,8 +26,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Product Category</h3>
-              <a href="{{route('product-category.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
+              <h3 class="card-title">Quotation</h3>
+              <a href="{{route('quotation.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,20 +38,22 @@
                 <thead>
                 <tr>
                   <th>Sn</th>
-                  <th>Title</th>
+                  <th>Customer</th>
+                  <th>Total Amount</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($categories as $category)
+                  @foreach($quotations as $quotation)
                   <tr>
-                    <td>{{$category->id}}</td>
-                    <td>{{$category->title}}</td>
-                    <td>{{$category->created_at->format('Y m d')}}</td>
+                    <td>{{$quotation->id}}</td>
+                    <td><a href="{{route('quotation.show',$quotation->id)}}">{{$quotation->customer->name}}</a></td>
+                    <td>{{$quotation->total_amount}}</td>
+                    <td>{{$quotation->created_at->format('Y/m/d')}}</td>
                     <td>
-                      <a href="{{route('product-category.edit',$category)}}" class="btn btn-sm btn-info">Edit</a>
-                      <form action="{{route('product-category.destroy',$category)}}" method="POST">
+                      <a href="{{route('quotation.edit',$quotation->id)}}" class="btn btn-sm btn-info">Edit</a>
+                      <form action="{{route('quotation.destroy',$quotation->id)}}" method="POST">
                         @csrf @method('delete')
                         <button class="btn dltBtn btn-danger btn-sm">Delete</button>
                       </form>

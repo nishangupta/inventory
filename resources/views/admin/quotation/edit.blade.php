@@ -6,13 +6,13 @@
       <div class="container-fluid">
           <div class="row mb-2">
               <div class="col-sm-6">
-                  <h1>Sale</h1>
+                  <h1>Quotation</h1>
               </div>
               <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                       <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                      <li class="breadcrumb-item"><a href="{{route('sale.index')}}">Sale</a></li>
-                      <li class="breadcrumb-item active">Create</li>
+                      <li class="breadcrumb-item"><a href="{{route('quotation.index')}}">Quotation</a></li>
+                      <li class="breadcrumb-item active">Update</li>
                   </ol>
               </div>
           </div>
@@ -25,46 +25,32 @@
               <div class="col-12">
                   <div class="card card-outline card-primary">
                       <div class="card-header">
-                          <h3 class="card-title">Create</h3>
-                          <a href="{{route('sale.index')}}" class="btn btn-sm btn-primary float-right">Go back</a>
+                          <h3 class="card-title">Update</h3>
+                          <a href="{{route('quotation.index')}}" class="btn btn-sm btn-primary float-right">Go back</a>
                       </div>
                       <div class="card-body text-muted">
                           <x-input-error />
 
-                          <form action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
-                              @csrf
+                          <form action="{{route('quotation.update',$quotation)}}" method="POST" enctype="multipart/form-data">
+                              @csrf @method('patch')
 
                               <div class="row">
                                   <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <label>Customer Name <span class="text-danger">*</span></label>
-                                          <input list="customers" name="customer_id" class="form-control" autocomplete="false">
-                                          <datalist id="customers">
-                                              @foreach($customers as $customer)
-                                              <option value="{{$customer->name}}">
-                                                  @endforeach
-                                          </datalist>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <label>Sale Date <span class="text-danger">*</span></label>
-                                          <input type="date" name="sale_date" class="form-control">
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <label>Payment Type <span class="text-danger">*</span></label>
-                                          <select name="payment_type" class="form-control">
-                                              <option value="cash">Cash</option>
-                                              <option value="bank">Bank</option>
-                                          </select>
-                                      </div>
+                                      
+                                    <div class="form-group">
+                                        <label>Customer Name <span class="text-danger">*</span></label>
+                                        <select id="selectCustomer" name="customer_id" placeholder="Pick customer" class="form-control">
+                                            @foreach($customers as $customer)
+                                            <option value="{{$customer->id}}" {{$customer->id == $quotation->customer->id?'selected':''}}>{{$customer->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        
+                                    </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group">
                                           <label>Details</label>
-                                          <textarea cols="10" rows="1" class="form-control" name="details"></textarea>
+                                          <textarea cols="10" rows="1" class="form-control" name="details">{{$quotation->details??old('details')}}</textarea>
                                       </div>
                                   </div>
                               </div>
@@ -74,94 +60,95 @@
                                       <tr>
                                           <th><input class='check_all' type='checkbox' onclick="select_all()" /></th>
                                           <th>S.No</th>
-                                          <th>Medicine Name</th>
-                                          <th>Expire Date</th>
+                                          <th>Name</th>
                                           <th>Qty</th>
                                           <th>Selling Price</th>
                                           <th>Total</th>
                                       </tr>
                                   </thead>
                                   <tbody>
+                                    @foreach($quotation->quotationProducts as $key=>$product)
+                                      @php
+                                      $c= $key+1;
+                                      @endphp
                                       <tr>
                                           <td><input type='checkbox' class='chkbox' /></td>
-                                          <td><span id='sn'>1.</span></td>
+                                          <td><span id='sn'>{{$c}}.</span></td>
                                           <td>
-                                              <input class="form-control autocomplete_txt" type='text' data-type="medicine_name" id='medicine_name_1' name='medicine_name[]' />
+                                              <input class="form-control autocomplete_txt" type='text' value="{{$product->title}}" data-type="title" id='{{'title_'.$c}}' name='title[]' />
                                           </td>
-                                          <td><input class="form-control autocomplete_txt" type='text' data-type="expire_date" id='expire_date_1' name='expire_date[]' /></td>
-                                          <td><input class="form-control qty autocomplete_txt" type='number' data-type="qty" id='qty_1' name='qty[]' /> </td>
-                                          <td><input class="form-control selling_price autocomplete_txt" type='number' data-type="selling_price" id='selling_price_1' name='selling_price[]' /> </td>
-                                          <td><input class="form-control total autocomplete_txt" type='number' data-type="total" id='total_1' name='total[]' readonly /> </td>
+                                          <td><input class="form-control qty autocomplete_txt" type='number'  value="{{$product->qty}}" data-type="qty" id='{{'qty_'.$c}}' name='qty[]' /> </td>
+                                          <td><input class="form-control price autocomplete_txt" type='number' value="{{$product->price}}" data-type="price" id='{{'price_'.$c}}' name='price[]' /> </td>
+                                          <td><input class="form-control total autocomplete_txt" type='number'  value="{{$product->total}}" data-type="total" id='{{'total_'.$c}}' name='total[]' readonly /> </td>
                                       </tr>
+                                      @endforeach
                                   </tbody>
                               </table>
-                              <br>
 
                               <br>
 
-                              <div class="row clearfix">
+                              <div class="row">
                                   <div class="col-md-12">
                                       <button type="button" class='btn btn-danger delete' id='delete_row'>- Delete</button>
-                                      <button type="button" class='btn btn-success addbtn'>+ Add More</button>
+                                      <button type="button" class='btn btn-success float-right addbtn'>+ Add More</button>
                                   </div>
                               </div>
-                              <div class="row clearfix" style="margin-top:20px">
-                                  <div class="pull-right col-md-4">
+
+                              <div class="row" style="margin-top:20px">
+                                <div class="col-md-6"></div>
+                                  <div class="float-right col-md-6">
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Sub Total</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly />
+                                              <input type="number" name='sub_total'  value="{{$quotation->sub_total}}" placeholder='0.00' class="form-control" id="sub_total" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Tax</label>
                                           <div class="col-md-10">
-                                              <input type="number" class="form-control" id="tax" placeholder="0">
+                                              <input type="number" readonly name='tax_rate' value="{{$quotation->tax_rate}}" class="form-control" id="tax" placeholder="0">
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Tax Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='tax_amount' id="tax_amount"  value="{{$quotation->tax_amount}}" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount</label>
                                           <div class="col-md-10">
-                                              <input type="number" class="form-control" id="discount" placeholder="0">
+                                              <input type="number" name='discount_rate' value="{{$quotation->discount_rate}}" class="form-control" id="discount"  placeholder="0">
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='discount_amount' id="discount_amount" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='discount_amount' id="discount_amount" value="{{$quotation->discount_amount}}"  placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Grand Total</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='total_amount' id="total_amount" value="{{$quotation->total_amount}}" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
-                                      <div class="form-group row">
+                                      {{-- <div class="form-group row">
                                           <label class="col-form-label col-md-2">Paid Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='paid_amount' id="paid_amount" placeholder='0.00' class="form-control" />
+                                              <input type="number" name='paid_amount' id="paid_amount" value="{{$quotation->paid_amount}}" placeholder='0.00' class="form-control" />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Due Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='due_amount' id="due_amount" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='due_amount' id="due_amount"  value="{{$quotation->due_amount}}"  placeholder='0.00' class="form-control" readonly />
                                           </div>
-                                      </div>
-                                  </div>
-                                  <div class="m-t-20 text-center">
-                                      <button class="btn btn-primary submit-btn btn-sm" type="submit">Create Sale</button>
+                                      </div> --}}
                                   </div>
                               </div>
 
-                              <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                              <button type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
 
                           </form>
                       </div>
@@ -177,8 +164,22 @@
   <!-- /.content -->
 </div>
 @endsection
+
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+@endpush
+
 @push('js')
-<script>$(document).ready(function() {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+    $('#selectCustomer').selectize({
+        sortField: 'text'
+    });
 
   $(".delete").on('click', function() {
       $('.chkbox:checkbox:checked').parents("tr").remove();
@@ -191,10 +192,9 @@
       count = $('table tr').length;
       var data = "<tr><td><input type='checkbox' class='chkbox'/></td>";
       data += "<td><span id='sn" + i + "'>" + count + ".</span></td>";
-      data += "<td><input class='form-control autocomplete_txt' type='text' data-type='medicine_name' id='medicine_name_" + i + "' name='medicine_name[]'/></td>";
-      data += "<td><input class='form-control autocomplete_txt' type='text' data-type='expire_date' id='expire_date_" + i + "' name='expire_date[]'/></td>";
+      data += "<td><input class='form-control autocomplete_txt' type='text' data-type='title' id='title_" + i + "' name='title[]'/></td>";
       data += "<td><input class='form-control qty autocomplete_txt' type='number' data-type='qty' id='qty_" + i + "' name='qty[]'/></td>";
-      data += "<td><input class='form-control selling_price autocomplete_txt' type='number' data-type='selling_price' id='selling_price_" + i + "' name='selling_price[]'/></td>";
+      data += "<td><input class='form-control price autocomplete_txt' type='number' data-type='price' id='price_" + i + "' name='price[]'/></td>";
       data += "<td><input class='form-control total autocomplete_txt' type='number' data-type='total' id='total_" + i + "' name='total[]'/></td></tr>";
       $('table').append(data);
       i++;
@@ -238,11 +238,11 @@ function updateSerialNo() {
 $(document).on('focus', '.autocomplete_txt', function() {
   type = $(this).data('type');
 
-  if (type == 'medicine_name') autoType = 'medicine_name';
-  if (type == 'expire_date') autoType = 'expire_date';
+  if (type == 'title') autoType = 'title';
   if (type == 'qty') autoType = 'qty';
-  if (type == 'selling_price') autoType = 'selling_price';
+  if (type == 'price') autoType = 'price';
 
+console.log(this)
   $(this).autocomplete({
       minLength: 0,
       source: function(request, response) {
@@ -270,10 +270,9 @@ $(document).on('focus', '.autocomplete_txt', function() {
           id_arr = $(this).attr('id');
           id = id_arr.split("_");
           elementId = id[id.length - 1];
-          $('#medicine_name_' + elementId).val(data.medicine_name);
-          $('#expire_date_' + elementId).val(data.expire_date);
+          $('#title_' + elementId).val(data.title);
           $('#qty_' + elementId).val(data.qty);
-          $('#selling_price_' + elementId).val(data.selling_price);
+          $('#price_' + elementId).val(data.price);
       }
   });
 
@@ -285,8 +284,8 @@ function calc() {
       var html = $(this).html();
       if (html != '') {
           var qty = $(this).find('.qty').val();
-          var selling_price = $(this).find('.selling_price').val();
-          $(this).find('.total').val(qty * selling_price);
+          var price = $(this).find('.price').val();
+          $(this).find('.total').val(qty * price);
 
           calc_total();
       }

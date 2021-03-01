@@ -18,11 +18,18 @@ class CreateSalesTable extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->text('details')->nullable();
             $table->string('sub_total');
+            $table->string('tax_rate')->nullable();
             $table->string('tax_amount')->default(0);
             $table->string('total_amount');
-            $table->string('paid_amount');
+            $table->string('paid_amount')->nullable();
+            $table->string('discount_rate')->nullable();
             $table->string('discount_amount')->default(0);
             $table->string('due_amount')->default(0);
+
+            $table->enum('payment_type',['cash','bank']);
+            $table->string('chq_no')->nullable();
+            $table->string('chq_date')->nullable();
+            
             $table->boolean('status')->default(false);
             $table->timestamps();   
         });

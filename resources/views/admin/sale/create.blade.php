@@ -49,11 +49,42 @@
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group">
-                                          <label>Details</label>
+                                          <label>Sale Details</label>
                                           <textarea cols="10" rows="1" class="form-control" name="details">{{old('details')}}</textarea>
                                       </div>
                                   </div>
                               </div>
+                              
+                              <div class="row">
+                                <div class="col-sm-6">
+                                    
+                                  <div class="form-group">
+                                      <label>Payment type <span class="text-danger">*</span></label>
+                                      <select id="paymentType" name="payment_type" placeholder="Pick paymeny type" required class="form-control">
+                                          <option value="cash">Cash</option>
+                                          <option value="bank">Bank</option>
+                                      </select>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6" id="chqOption">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Chq no.</label>
+                                                <input type="text" class="form-control" name="chq_no" value="{{old('chq_no')}}">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label>Chq date</label>
+                                                <input type="date" class="form-control" name="chq_date" value="">{{old('chq_date')}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
 
                               <table class="table table-bordered table-hover" id="tab_logic">
                                   <thead>
@@ -98,22 +129,22 @@
                                               <input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly />
                                           </div>
                                       </div>
-                                      <div class="form-group row">
+                                      <div class="form-group row d-none">
                                           <label class="col-form-label col-md-2">Tax</label>
                                           <div class="col-md-10">
-                                              <input type="number" class="form-control" id="tax" placeholder="0">
+                                              <input type="number" readonly name='tax_rate' class="form-control" id="tax" placeholder="0">
                                           </div>
                                       </div>
-                                      <div class="form-group row">
+                                      <div class="form-group row d-none">
                                           <label class="col-form-label col-md-2">Tax Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number"  name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount</label>
                                           <div class="col-md-10">
-                                              <input type="number" class="form-control" id="discount" placeholder="0">
+                                              <input type="number"  name='discount_rate' class="form-control" id="discount" placeholder="0">
                                           </div>
                                       </div>
                                       <div class="form-group row">
@@ -131,7 +162,7 @@
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Paid Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" required name='paid_amount' id="paid_amount" placeholder='0.00' class="form-control" />
+                                              <input type="number" name='paid_amount' id="paid_amount" placeholder='0.00' class="form-control" />
                                           </div>
                                       </div>
                                       <div class="form-group row">
@@ -162,11 +193,12 @@
 
 @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
 @endpush
 
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
 
@@ -175,6 +207,25 @@ $(document).ready(function() {
     $('#selectCustomer').selectize({
         sortField: 'text'
     });
+
+    checkPayment()
+
+    function checkPayment(){
+        const val = document.getElementById('paymentType').value
+        if(val == 'bank'){
+            $('#chqOption').css('display','block')
+        }else{
+            $('#chqOption').css('display','none')
+        }
+    }
+  
+    $('#paymentType').change(function(){
+        checkPayment()
+    })
+
+   
+    
+    //calculation
 
   $(".delete").on('click', function() {
       $('.chkbox:checkbox:checked').parents("tr").remove();

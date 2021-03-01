@@ -16,9 +16,6 @@ class CategorySeeder extends Seeder
     {
         $items = [
             [
-              'title' => 'Purchase',
-            ],
-            [
               'title' => 'Salary/Wage',
             ],
             [

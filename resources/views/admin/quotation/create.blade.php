@@ -6,13 +6,13 @@
       <div class="container-fluid">
           <div class="row mb-2">
               <div class="col-sm-6">
-                  <h1>Sale</h1>
+                  <h1>Quotation</h1>
               </div>
               <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                       <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                      <li class="breadcrumb-item"><a href="{{route('sale.index')}}">Sale</a></li>
-                      <li class="breadcrumb-item active">Update</li>
+                      <li class="breadcrumb-item"><a href="{{route('quotation.index')}}">Quotation</a></li>
+                      <li class="breadcrumb-item active">Create</li>
                   </ol>
               </div>
           </div>
@@ -25,14 +25,14 @@
               <div class="col-12">
                   <div class="card card-outline card-primary">
                       <div class="card-header">
-                          <h3 class="card-title">Update</h3>
-                          <a href="{{route('sale.index')}}" class="btn btn-sm btn-primary float-right">Go back</a>
+                          <h3 class="card-title">Create</h3>
+                          <a href="{{route('quotation.index')}}" class="btn btn-sm btn-primary float-right">Go back</a>
                       </div>
                       <div class="card-body text-muted">
                           <x-input-error />
 
-                          <form action="{{route('sale.update',$sale)}}" method="POST" enctype="multipart/form-data">
-                              @csrf @method('patch')
+                          <form action="{{route('quotation.store')}}" method="POST" enctype="multipart/form-data">
+                              @csrf
 
                               <div class="row">
                                   <div class="col-sm-6">
@@ -41,7 +41,7 @@
                                         <label>Customer Name <span class="text-danger">*</span></label>
                                         <select id="selectCustomer" name="customer_id" placeholder="Pick customer" class="form-control">
                                             @foreach($customers as $customer)
-                                            <option value="{{$customer->id}}" {{$customer->id == $sale->customer->id?'selected':''}}>{{$customer->name}}</option>
+                                            <option value="{{$customer->id}}">{{$customer->name}}</option>
                                             @endforeach
                                         </select>
                                         
@@ -50,40 +50,10 @@
                                   <div class="col-sm-6">
                                       <div class="form-group">
                                           <label>Details</label>
-                                          <textarea cols="10" rows="1" class="form-control" name="details">{{$sale->details??old('details')}}</textarea>
+                                          <textarea cols="10" rows="1" class="form-control" name="details">{{old('details')}}</textarea>
                                       </div>
                                   </div>
                               </div>
-
-                              <div class="row">
-                                <div class="col-sm-6">
-                                    
-                                  <div class="form-group">
-                                      <label>Payment type <span class="text-danger">*</span></label>
-                                      <select id="paymentType" name="payment_type" required class="form-control">
-                                          <option value="cash" {{$sale->payment_type=='cash'?'selected':''}} >Cash</option>
-                                          <option value="bank" {{$sale->payment_type=='bank'?'selected':''}} >Bank</option>
-                                      </select>
-                                  </div>
-                                </div>
-                                <div class="col-sm-6" id="chqOption">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Chq no.</label>
-                                                <input type="text" class="form-control" name="chq_no" value="{{$sale->chq_no??old('chq_no')}}">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Chq date</label>
-                                                <input type="date" class="form-control" name="chq_date" value="">{{$sale->chq_date??old('chq_date')}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
 
                               <table class="table table-bordered table-hover" id="tab_logic">
                                   <thead>
@@ -97,21 +67,16 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach($sale->saleProducts as $key=>$product)
-                                      @php
-                                      $c= $key+1;
-                                      @endphp
                                       <tr>
                                           <td><input type='checkbox' class='chkbox' /></td>
-                                          <td><span id='sn'>{{$c}}.</span></td>
+                                          <td><span id='sn'>1.</span></td>
                                           <td>
-                                              <input class="form-control autocomplete_txt" type='text' value="{{$product->title}}" data-type="title" id='{{'title_'.$c}}' name='title[]' />
+                                              <input class="form-control autocomplete_txt" type='text' data-type="title" id='title_1' name='title[]' />
                                           </td>
-                                          <td><input class="form-control qty autocomplete_txt" type='number'  value="{{$product->qty}}" data-type="qty" id='{{'qty_'.$c}}' name='qty[]' /> </td>
-                                          <td><input class="form-control price autocomplete_txt" type='number' value="{{$product->price}}" data-type="price" id='{{'price_'.$c}}' name='price[]' /> </td>
-                                          <td><input class="form-control total autocomplete_txt" type='number'  value="{{$product->total}}" data-type="total" id='{{'total_'.$c}}' name='total[]' readonly /> </td>
+                                          <td><input class="form-control qty autocomplete_txt" type='number' data-type="qty" id='qty_1' name='qty[]' /> </td>
+                                          <td><input class="form-control price autocomplete_txt" type='number' data-type="price" id='price_1' name='price[]' /> </td>
+                                          <td><input class="form-control total autocomplete_txt" type='number' data-type="total" id='total_1' name='total[]' readonly /> </td>
                                       </tr>
-                                      @endforeach
                                   </tbody>
                               </table>
 
@@ -130,51 +95,51 @@
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Sub Total</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='sub_total'  value="{{$sale->sub_total}}" placeholder='0.00' class="form-control" id="sub_total" readonly />
+                                              <input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly />
                                           </div>
                                       </div>
-                                      <div class="form-group row d-none">
+                                      <div class="form-group row">
                                           <label class="col-form-label col-md-2">Tax</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='tax_rate' readonly  class="form-control" id="tax" placeholder="0">
+                                              <input type="number" name='tax_rate' readonly value="13" class="form-control" id="tax" placeholder="0">
                                           </div>
                                       </div>
-                                      <div class="form-group row d-none">
+                                      <div class="form-group row">
                                           <label class="col-form-label col-md-2">Tax Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='tax_amount' id="tax_amount"  value="{{$sale->tax_amount}}" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name="discount_rate" value="{{$sale->discount_rate}}" class="form-control" id="discount"  placeholder="0">
+                                              <input type="number" name='discount_rate' class="form-control" id="discount" placeholder="0">
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='discount_amount' id="discount_amount" value="{{$sale->discount_amount}}"  placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='discount_amount' id="discount_amount" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Grand Total</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='total_amount' id="total_amount" value="{{$sale->total_amount}}" placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
-                                      <div class="form-group row">
+                                      {{-- <div class="form-group row">
                                           <label class="col-form-label col-md-2">Paid Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='paid_amount' id="paid_amount" value="{{$sale->paid_amount}}" placeholder='0.00' class="form-control" />
+                                              <input type="number" name='paid_amount' id="paid_amount" placeholder='0.00' class="form-control" />
                                           </div>
                                       </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Due Amount</label>
                                           <div class="col-md-10">
-                                              <input type="number" name='due_amount' id="due_amount"  value="{{$sale->due_amount}}"  placeholder='0.00' class="form-control" readonly />
+                                              <input type="number" name='due_amount' id="due_amount" placeholder='0.00' class="form-control" readonly />
                                           </div>
-                                      </div>
+                                      </div> --}}
                                   </div>
                               </div>
 
@@ -210,24 +175,7 @@ $(document).ready(function() {
     $('#selectCustomer').selectize({
         sortField: 'text'
     });
-    
-    checkPayment()
 
-    function checkPayment(){
-        const val = document.getElementById('paymentType').value
-        if(val == 'bank'){
-            $('#chqOption').css('display','block')
-        }else{
-            $('#chqOption').css('display','none')
-        }
-    }
-  
-    $('#paymentType').change(function(){
-        checkPayment()
-    })
-
-    // calulation
-    
   $(".delete").on('click', function() {
       $('.chkbox:checkbox:checked').parents("tr").remove();
       $('.check_all').prop("checked", false);

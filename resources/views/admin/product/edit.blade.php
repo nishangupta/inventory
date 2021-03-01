@@ -36,29 +36,58 @@
 
               <form action="{{route('product.update',$product)}}" method="POST" enctype="multipart/form-data">
                 @csrf @method('put')
-                <div class="form-group">
-                  <label for="">Title</label>
-                  <input type="text" name="title" placeholder="Title" value="{{$product->title??old('title')}}" class="form-control" required autofocus>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Title</label>
+                      <input type="text" name="title" placeholder="Title" value="{{$product->title??old('title')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Cost Price</label>
+                      <input type="text" name="cost_price" placeholder="Cost Price" value="{{$product->cost_price??old('cost_price')}}" class="form-control" >
+                    </div>
+                  </div>
                 </div>
-                
-                <div class="form-group">
-                  <label for="" >Price</label>
-                  <input type="text" name="price" placeholder="Price" value="{{$product->price??old('price')}}" class="form-control" >
-                </div>
-                
-                <div class="form-group">
-                  <label for="" >Qty</label>
-                  <input type="text" name="qty" placeholder="Qty" value="{{$product->qty??old('qty')}}" class="form-control">
+            
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="" >Type</label>
+                      <select name="type" class="form-control" id="">
+                        <option value="fixed" {{$product->type =='fixed'?'selected':''}}>Fixed</option>
+                        <option value="percent" {{$product->type =='percent'?'selected':''}}>Percent</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="">Margin Value</label>
+                      <input type="text" name="margin" placeholder="margin" value="{{$product->margin??old('margin')}}" required class="form-control" >
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="" >Product Category</label>
-
-                  <select name="product_category_id" class="form-control">
-                    @foreach($categories as $category)
-                      <option value="{{$category->id}}" {{$category->id == $product->productCategory->id ?'selected':''}}>{{$category->title}}</option>
-                    @endforeach
-                  </select>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Qty</label>
+                      <input type="text" name="qty" placeholder="Qty" value="{{$product->qty??old('qty')}}" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Product Category</label>
+    
+                      <select name="product_category_id" class="form-control">
+                        @foreach($categories as $category)
+                          <option value="{{$category->id}}" {{$category->id == $product->productCategory->id ?'selected':''}}>{{$category->title}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
                 <br>

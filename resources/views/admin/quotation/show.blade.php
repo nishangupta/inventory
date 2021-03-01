@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Sale</h1>
+          <h1>Quotation</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{route('sale.index')}}">Sale</a></li>
+            <li class="breadcrumb-item"><a href="{{route('quotation.index')}}">Quotation</a></li>
             <li class="breadcrumb-item active">Show</li>
           </ol>
         </div>
@@ -20,13 +20,9 @@
     </div><!-- /.container-fluid -->
   </section>
 
-
+  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-
-      <div class="no-print">
-        <a href="{{route('customer.show',$sale->customer->id)}}" class="btn btn-primary btn-sm mb-3">View All Sales</a>
-      </div>
 
       <x-input-error />
       <x-alert-msg />
@@ -58,21 +54,16 @@
                 <div class="col-sm-4 invoice-col">
                   To
                   <address>
-                    <strong>{{$sale->customer->name}}</strong><br>
-                    {{$sale->customer->address}}<br>
-                    Phone: {{$sale->customer->phone}}<br>
-                    Email: {{$sale->customer->email}}
+                    <strong>{{$quotation->customer->name}}</strong><br>
+                    {{$quotation->customer->address}}<br>
+                    Phone: {{$quotation->customer->phone}}<br>
+                    Email: {{$quotation->customer->email}}
                   </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                  <b>Invoice #{{$sale->id}}</b><br>
-                  <b>Issue Date:{{$sale->created_at->format('Y/m/d')}}</b><br>
-                  <b>Payment type: </b> {{$sale->payment_type}}<br>
-                  @if($sale->payment_type =='bank')
-                  <b>Cheque no: </b> {{$sale->chq_no}}<br>
-                  <b>Cheque date: </b> {{$sale->chq_date}}<br>
-                  @endif
+                  <b>Invoice #{{$quotation->id}}</b><br>
+                  <b>Quotation Date: </b>{{$quotation->created_at->format('Y/m/d')}}<br>
                 </div>
 
               </div>
@@ -92,7 +83,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                      @foreach($sale->saleProducts as $key=>$p)
+                      @foreach($quotation->quotationProducts as $key=>$p)
                       <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$p->title}}</td>
@@ -119,28 +110,28 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>Rs.{{number_format($sale->sub_total)}}</td>
+                        <td>Rs.{{number_format($quotation->sub_total)}}</td>
                       </tr>
                       <tr>
-                        <th>Discount:</th>
-                        <td>{{number_format($sale->discount_amount)}}</td>
+                        <th>Discount:{{$quotation->discount_rate??''}}</th>
+                        <td>{{number_format($quotation->discount_amount)}}</td>
+                      </tr>
+                      <tr>
+                        <th>Tax:{{$quotation->tax_rate.'%'??''}}</th>
+                        <td>{{number_format($quotation->tax_amount)}}</td>
+                      </tr>
+                      <tr>
+                        <th>Grand Total:</th>
+                        <td>{{number_format($quotation->total_amount)}}</td>
                       </tr>
                       {{-- <tr>
-                        <th>Tax:</th>
-                        <td>{{number_format($sale->tax_amount)}}</td>
-                      </tr> --}}
-                      <tr>
-                        <th>Grand Total</th>
-                        <td>{{number_format($sale->total_amount)}}</td>
-                      </tr>
-                      <tr>
                         <th>Due:</th>
-                        <td>{{number_format($sale->due_amount)}}</td>
+                        <td>{{number_format($quotation->due_amount)}}</td>
                       </tr>
                       <tr>
                         <th>Paid:</th>
-                        <td>{{number_format($sale->paid_amount)}}</td>
-                      </tr>
+                        <td>{{number_format($quotation->paid_amount)}}</td>
+                      </tr> --}}
                     </table>
                   </div>
                 </div>
@@ -151,12 +142,13 @@
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-6">
-                  <a href="{{route('sale.printInvoice',$sale->id)}}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                  <a href="{{route('quotation.printInvoice',$quotation->id)}}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                  <a href="{{route('quotation.mail',$quotation->id)}}" class="btn btn-default"><i class="fas fa-envelope"></i> Mail</a>
                 </div>
                 <div class="col-6">
                   <div class="d-flex justify-content-end">
-                    <a href="{{route('sale.edit',$sale)}}" class="btn btn-info mr-3">Edit</a>
-                    <form action="{{route('sale.destroy',$sale)}}" method="POST">
+                    <a href="{{route('quotation.edit',$quotation)}}" class="btn btn-info mr-3">Edit</a>
+                    <form action="{{route('quotation.destroy',$quotation)}}" method="POST">
                       @csrf @method('delete')
                       <button type="submit" class="dltBtn btn btn-danger">Delete</button>
                     </form>

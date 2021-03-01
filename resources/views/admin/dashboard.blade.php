@@ -29,7 +29,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h4>Rs {{number_format($totalIncome)}}</h4>
+              <h4>Rs {{number_format($totalSales)}}</h4>
 
               <p>Sales</p>
             </div>
@@ -39,7 +39,21 @@
             <a href="{{route('sale.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+
+        <div class="col-lg-3 col-6">
+          <div class="small-box bg-olive">
+            <div class="inner">
+              <h4>Rs {{number_format($totalIncome)}}</h4>
+
+              <p>Income</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user-friends"></i>
+            </div>
+            <a href="{{route('sale.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-success">
@@ -54,9 +68,8 @@
             <a href="{{route('expense.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+
         <div class="col-lg-3 col-6">
-          <!-- small box -->
           <div class="small-box bg-navy">
             <div class="inner">
               <h4>Rs {{number_format($totalProfit)}}</h4>
@@ -69,22 +82,7 @@
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h4>65</h4>
 
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-user-friends"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
       </div>
       
       <div class="row">
@@ -120,7 +118,20 @@
         </div>
     
 
-        <div class="clearfix hidden-md-up"></div>
+      <div class="clearfix hidden-md-up"></div>
+          
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3 shadow-hover">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-envelope-open-text"></i></span>
+
+            <div class="info-box-content">
+              <a href="{{route('supplier.index')}}">
+                <span class="info-box-text text-dark">Suppliers</span>
+                <span class="info-box-number text-dark">{{$supplierCount}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
 
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box mb-3 shadow-hover">
@@ -134,25 +145,12 @@
             </div>
           </div>
         </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="info-box mb-3 shadow-hover">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-envelope-open-text"></i></span>
-
-            <div class="info-box-content">
-              <a href="{route('appointment.index')}}">
-                <span class="info-box-text text-dark">Customers</span>
-                <span class="info-box-number text-dark">{{$customerCount}}</span>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
     </div>
     <!--/. container-fluid -->
   </section>
-  <!-- /.content -->
+  
 </div>
 @endsection
 

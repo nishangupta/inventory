@@ -40,8 +40,10 @@
                   <th>Sn</th>
                   <th>Title</th>
                   <th>Category</th>
-                  <th>Price</th>
                   <th>Qty</th>
+                  <th>Cost Price</th>
+                  <th>Type/Margin</th>
+                  <th>Unit Price</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
@@ -52,8 +54,10 @@
                     <td>{{$product->id}}</td>
                     <td><a href="{{route('product.show',$product->id)}}">{{$product->title}}</a></td>
                     <td>{{$product->productCategory->title}}</td>
-                    <td>{{$product->price}}</td>
                     <td>{{$product->qty}}</td>
+                    <td>{{$product->cost_price}}</td>
+                    <td>{{$product->type.' ['.$product->margin.']'}}</td>
+                    <td>{{$product->price}}</td>
                     <td>{{$product->created_at->format('Y m d')}}</td>
                     <td>
                       <a href="{{route('product.edit',$product)}}" class="btn btn-sm btn-info">Edit</a>

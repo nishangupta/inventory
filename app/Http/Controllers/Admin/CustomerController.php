@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Sale;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,13 @@ class CustomerController extends Controller
     public function edit($id){
         $customer = Customer::whereKey($id)->first(); 
         return view('admin.customer.edit',compact('customer'));
+    }
+
+    public function show($customer){
+        $customer = Customer::findOrFail($customer);
+        $sales = Sale::where('customer_id',$customer->id)->withCount('saleProducts')->paginate(25);
+        $pendingBal = $sales->sum('due_amount');
+        return view('admin.customer.show',compact('customer','sales','pendingBal'));
     }
 
     public function update(Request $request,Customer $customer){

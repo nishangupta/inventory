@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" >
   {{-- style="background-color:#1E1E1E;" --}}
   <a href="{{route('admin.index')}}" class="brand-link" >
-    {{-- <img src="{{asset('img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-      style="opacity: .8"> --}}
-    <span class="brand-text font-weight-light">Inventory Management</span>
+    <img src="{{asset($LOGO->value??'img/AdminLTELogo.png')}}" alt="" class="brand-image img-circle elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">{{$NAME->value??'Inventory'}}</span>
   </a>
 
   <!-- Sidebar -->
@@ -34,35 +34,19 @@
           <a href="#" class="nav-link">
             <i class="nav-icon far fas fa-cubes"></i>
             <p>
-              Product Category
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{route('product-category.create')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Add</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('product-category.index')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Manage</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon far fas fa-cubes"></i>
-            <p>
               Products
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
+            
+            <li class="nav-item">
+              <a href="{{route('product-category.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Product category</p>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a href="{{route('product.create')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -104,30 +88,6 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fas fa-dice-d6"></i>
-            <p>
-              Expense Category
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{route('category.create')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Add</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('category.index')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Manage</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
             <i class="nav-icon far fas fa-credit-card"></i>
             <p>
               Expenses
@@ -135,6 +95,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('category.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Expense category</p>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a href="{{route('expense.create')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -176,7 +143,7 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fas fa-shuttle-van"></i>
+            <i class="nav-icon far fas fa-shipping-fast"></i>
             <p>
               Suppliers
               <i class="fas fa-angle-left right"></i>
@@ -200,7 +167,7 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fas fa-list"></i>
+            <i class="nav-icon far fas fa-envelope"></i>
             <p>
               Quotations
               <i class="fas fa-angle-left right"></i>
@@ -208,20 +175,20 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('supplier.create')}}" class="nav-link">
+              <a href="{{route('quotation.create')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Add</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('supplier.index')}}" class="nav-link">
+              <a href="{{route('quotation.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Manage</p>
               </a>
             </li>
           </ul>
         </li>
-{{--        
+        
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon far fas fa-cog"></i>
@@ -244,7 +211,7 @@
               </a>
             </li>
           </ul>
-        </li> --}}
+        </li> 
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -258,13 +225,13 @@
             <li class="nav-item">
               <a href="{{route('usermanagement.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>User management</p>
+                <p>User Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{route('admin-password.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Profile</p>
+                <p>Change Password</p>
               </a>
             </li>
           </ul>

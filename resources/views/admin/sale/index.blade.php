@@ -42,6 +42,7 @@
                   <th>Total Amount</th>
                   <th>Due</th>
                   <th>Paid</th>
+                  <th>Payment Type</th>
                   <th>Sold at</th>
                   <th>Actions</th>
                 </tr>
@@ -54,6 +55,7 @@
                     <td>{{$sale->total_amount}}</td>
                     <td>{{$sale->due_amount}}</td>
                     <td>{{$sale->paid_amount}}</td>
+                    <td>{{$sale->payment_type}}</td>
                     <td>{{$sale->created_at->format('Y/m/d')}}</td>
                     <td>
                       <a href="{{route('sale.edit',$sale)}}" class="btn btn-sm btn-info">Edit</a>

@@ -12,7 +12,7 @@ class AccountController extends Controller
         if($user->hasRole('admin')){
             return redirect(route('admin.index'));
         }else{
-            return redirect(route('user.index'));
+            return redirect(route('admin.index'));
         }
     }
 

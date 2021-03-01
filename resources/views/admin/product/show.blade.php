@@ -36,24 +36,36 @@
               <div class="row">
                 <div class="col-12 col-md-6">
                   <div class="mb-3">
-                    <p>Description: {!!$product->description!!}</p>
+                    <p class="h5">Description: {!!$product->description!!}</p>
                   </div>
                   <hr>
 
                   <div class="mb-3">
-                    <p>Price: {{$product->price}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Units/Qty: {{$product->qty}}</p>
+                    <p class="h5">Cost Price: {{number_format($product->cost_price)}}</p>
                   </div>
                   
                   <div class="mb-3">
-                    <p>Created at: {{$product->created_at}}</p>
+                    <p class="h5">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
+                  </div>
+
+                  <div class="mb-3">
+                    <p class="h5">Selling Price: {{number_format($product->price)}}</p>
                   </div>
     
                   <div class="mb-3">
-                    <p>Updated at:{{$product->updated_at}}</p>
+                    <p class="h5">Units/Qty: {{$product->qty}}</p>
+                  </div>
+                  
+                  
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <p class="h6">Created at: {{$product->created_at}}</p>
+                  </div>
+    
+                  <div class="mb-3">
+                    <p class="h6">Updated at:{{$product->updated_at}}</p>
                   </div>
 
                   <div class="d-flex">
@@ -63,10 +75,6 @@
                       <button type="submit" class="dltBtn btn btn-danger">Delete</button>
                     </form>
                   </div>
-                  
-                </div>
-
-                <div class="col-12 col-md-6">
               </div>
             
             </div>

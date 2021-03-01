@@ -34,11 +34,11 @@
             <div class="card-body text-muted">
               <x-input-error />
 
-              <form action="{{route('product-category.update',$category)}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route('product-category.update',$productCategory)}}" method="POST" enctype="multipart/form-data">
                 @csrf @method('put')
                 <div class="form-group">
                   <label for="">Title</label>
-                  <input type="text" name="title" placeholder="Title" value="{{$category->title??old('title')}}" class="form-control" required autofocus>
+                  <input type="text" name="title" placeholder="Title" value="{{$productCategory->title??old('title')}}" class="form-control" required autofocus>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>

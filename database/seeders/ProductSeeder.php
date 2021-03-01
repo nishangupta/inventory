@@ -16,13 +16,13 @@ class ProductSeeder extends Seeder
     {
         $items = [
             [
-              'title' => 'Laptop',
+              'title' => 'Excide battery',
             ],
             [
               'title' => 'Charger',
             ],
             [
-                'title' => 'Book',
+              'title' => 'Book',
             ],
               
           ];
@@ -31,9 +31,12 @@ class ProductSeeder extends Seeder
             $product =  Product::create([
               'product_category_id'=>1,
               'title' => $item['title'],
-              'price'=>'5000',
-              'qty'=>'10',
-              'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo voluptate optio molestiae tempora deleniti cupiditate, nihil ad doloremque obcaecati ex.'
+              'cost_price'=>'5000',
+              'price'=>'5750',
+              'qty'=>'100',
+              'type'=>'fixed',
+              'margin'=>'100',
+              'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. ex.'
             ]);
           }
     }

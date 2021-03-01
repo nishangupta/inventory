@@ -29,24 +29,24 @@ class ProductCategoryController extends Controller
         return redirect()->route('product-category.index')->with('success','Category created!');
     }
     
-    public function edit(ProductCategory $category){
-        return view('admin.product-category.edit',compact('category'));
+    public function edit(ProductCategory $productCategory){
+        return view('admin.product-category.edit',compact('productCategory'));
     }
 
-    public function update(Request $request,ProductCategory $category){
+    public function update(Request $request,ProductCategory $productCategory){
         $request->validate([
             'title'=>'required|min:3',
         ]);
 
-        $category->update([
+        $productCategory->update([
             'title'=>$request->title,
         ]);
         
         return redirect(route('product-category.index'))->with('success','category updated!');
     }
     
-    public function destroy(ProductCategory $category){
-        $category->delete();
+    public function destroy(ProductCategory $productCategory){
+        $productCategory->delete();
         return redirect()->route('product-category.index')->with('success','category deleted');
 
     }

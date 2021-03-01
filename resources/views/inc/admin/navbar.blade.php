@@ -24,12 +24,12 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link" href="{route('notification.index')}}" title="notifications">
         <i class="far fa-bell"></i>
         <span class="badge badge-danger navbar-badge">{{$notiCount}}</span>
       </a>
-    </li>
+    </li> --}}
     
     <li class="nav-item" >
         <a href="{{route('account.logout')}}" title="Logout" class="nav-link"><i class="fas fa-power-off"></i></a>
