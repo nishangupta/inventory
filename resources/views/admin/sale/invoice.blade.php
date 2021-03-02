@@ -106,10 +106,10 @@
                 <th>Discount:</th>
                 <td>{{number_format($sale->discount_amount)}}</td>
               </tr>
-              {{-- <tr>
+              <tr>
                 <th>Tax:</th>
                 <td>{{number_format($sale->tax_amount)}}</td>
-              </tr> --}}
+              </tr>
               <tr>
                 <th>Grand Total</th>
                 <td>{{number_format($sale->total_amount)}}</td>

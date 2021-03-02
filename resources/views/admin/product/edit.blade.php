@@ -44,6 +44,27 @@
                       <input type="text" name="title" placeholder="Title" value="{{$product->title??old('title')}}" class="form-control" required autofocus>
                     </div>
                   </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Product Category</label>
+    
+                      <select name="product_category_id" class="form-control">
+                        @foreach($categories as $category)
+                          <option value="{{$category->id}}" {{$category->id == $product->productCategory->id ?'selected':''}}>{{$category->title}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Qty</label>
+                      <input type="text" name="qty" placeholder="Qty" value="{{$product->qty??old('qty')}}" class="form-control">
+                    </div>
+                  </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="" >Cost Price</label>
@@ -51,11 +72,30 @@
                     </div>
                   </div>
                 </div>
-            
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Tax type</label>
+                      
+                      <select name="tax_type" class="form-control">
+                        <option value="included" {{$product->tax_type == 'included'?'selected':''}}>Included</option>
+                        <option value="excluded" {{$product->tax_type == 'excluded'?'selected':''}}>Excluded</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Minumun stock alert</label>
+                      <input type="text" name="minimum" placeholder="Minimum stock" value="{{$product->minimum??old('minimum')}}" required  class="form-control">
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                      <label for="" >Type</label>
+                      <label for="" >Margin Type</label>
                       <select name="type" class="form-control" id="">
                         <option value="fixed" {{$product->type =='fixed'?'selected':''}}>Fixed</option>
                         <option value="percent" {{$product->type =='percent'?'selected':''}}>Percent</option>
@@ -69,27 +109,6 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="" >Qty</label>
-                      <input type="text" name="qty" placeholder="Qty" value="{{$product->qty??old('qty')}}" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="" >Product Category</label>
-    
-                      <select name="product_category_id" class="form-control">
-                        @foreach($categories as $category)
-                          <option value="{{$category->id}}" {{$category->id == $product->productCategory->id ?'selected':''}}>{{$category->title}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
                 <br>
                 
                 <div class="form-group">

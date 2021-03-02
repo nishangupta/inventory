@@ -101,11 +101,11 @@
                 <td>Rs.{{number_format($quotation->sub_total)}}</td>
               </tr>
               <tr>
-                <th>Discount:{{$quotation->discount_rate??''}}</th>
+                <th>Discount:</th>
                 <td>{{number_format($quotation->discount_amount)}}</td>
               </tr>
               <tr>
-                <th>Tax:{{$quotation->tax_rate.'%'??''}}</th>
+                <th>Tax:</th>
                 <td>{{number_format($quotation->tax_amount)}}</td>
               </tr>
               <tr>

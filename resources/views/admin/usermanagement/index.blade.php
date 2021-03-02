@@ -27,7 +27,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Admins</h3>
-              <a href="{{route('usermanagement.create')}}" class="btn btn-primary btn-sm float-right">Add Admin</a>
+              <a href="{{route('usermanagement.create')}}" class="btn btn-primary btn-sm float-right">Add</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -42,6 +42,7 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Address</th>
+                  <th>Role</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
@@ -54,6 +55,7 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->phone}}</td>
                     <td>{{$user->address}}</td>
+                    <td>{{$user->getRoleNames()}}</td>
                     <td>{{$user->created_at->format('d M Y')}}</td>
                     <td>
                       @if($user->id == 1)

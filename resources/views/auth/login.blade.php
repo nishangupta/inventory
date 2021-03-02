@@ -54,10 +54,11 @@
       <p class="mb-1 mt-4">
         <a href="{{route('password.request')}}">I forgot my password</a>
       </p>
+{{--       
       <p class="mb-0 mt-2">
         <a href="{{route('register')}}" class="text-center">Register now</a>
       </p>
-      
+       --}}
       <p class="mb-0 mt-2 float-right">
         <a href="{{route('home.index')}}" class="text-center">Go back</a>
       </p>

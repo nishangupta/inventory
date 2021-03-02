@@ -35,37 +35,39 @@
 
               <div class="row">
                 <div class="col-12 col-md-6">
-                  <div class="mb-3">
-                    <p class="h5">Description: {!!$product->description!!}</p>
-                  </div>
-                  <hr>
+                 
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <p class="h5">Total Units/Qty: {{$product->qty}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h5 text-danger">Alert/Minimum stock: {{$product->minimum}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h5">Cost Price: {{number_format($product->cost_price)}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h5">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h5">Selling Price: {{$product->price}}</p>
+                    </li>
 
-                  <div class="mb-3">
-                    <p class="h5">Cost Price: {{number_format($product->cost_price)}}</p>
-                  </div>
-                  
-                  <div class="mb-3">
-                    <p class="h5">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
-                  </div>
-
-                  <div class="mb-3">
-                    <p class="h5">Selling Price: {{number_format($product->price)}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p class="h5">Units/Qty: {{$product->qty}}</p>
-                  </div>
-                  
+                  </ul>
                   
                 </div>
 
                 <div class="col-12 col-md-6">
                   <div class="mb-3">
-                    <p class="h6">Created at: {{$product->created_at}}</p>
+                    <p class="">Description: {!!$product->description!!}</p>
+                  </div>
+                  <hr>
+                  <div class="mb-3">
+                    <p class="">Created at: {{$product->created_at}}</p>
                   </div>
     
                   <div class="mb-3">
-                    <p class="h6">Updated at:{{$product->updated_at}}</p>
+                    <p class="">Updated at:{{$product->updated_at}}</p>
                   </div>
 
                   <div class="d-flex">

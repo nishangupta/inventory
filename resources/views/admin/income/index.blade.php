@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Purchase</h1>
+          <h1>Incomes</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item active">Purchase</li>
+            <li class="breadcrumb-item active">Incomes</li>
           </ol>
         </div>
       </div>
@@ -26,8 +26,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Purchase</h3>
-              <a href="{{route('purchase.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
+              <h3 class="card-title">Incomes</h3>
+              <a href="{{route('income.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,25 +38,22 @@
                 <thead>
                 <tr>
                   <th>Sn</th>
-                  <th>Product</th>
-                  <th>Cost Price</th>
-                  <th>Qty</th>
-                  <th>Total</th>
+                  <th>Title</th>
+                  <th>Price</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach($purchases as $purchase)
+                  @foreach($incomes as $income)
                   <tr>
-                    <td>{{$purchase->id}}</td>
-                    <td><a href="{{route('purchase.show',$purchase->id)}}">{{$purchase->product->title}}</a></td>
-                    <td>{{$purchase->cost_price}}</td>
-                    <td>{{$purchase->qty}}</td>
-                    <td>{{$purchase->cost_price*$purchase->qty}}</td>
-                    <td>{{$purchase->created_at->format('Y/m/d')}}</td>
+                    <td>{{$income->id}}</td>
+                    <td><a href="{{route('income.show',$income->id)}}">{{$income->title}}</a></td>
+                    <td>{{$income->price}}</td>
+                    <td>{{$income->created_at->format('Y m d')}}</td>
                     <td>
-                      <form action="{{route('purchase.destroy',$purchase)}}" method="POST">
+                      <a href="{{route('income.edit',$income)}}" class="btn btn-sm btn-info">Edit</a>
+                      <form action="{{route('income.destroy',$income)}}" method="POST">
                         @csrf @method('delete')
                         <button class="btn dltBtn btn-danger btn-sm">Delete</button>
                       </form>

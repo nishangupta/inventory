@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,6 +36,12 @@ class SupplierController extends Controller
     public function edit($id){
         $supplier = Supplier::whereKey($id)->first(); 
         return view('admin.supplier.edit',compact('supplier'));
+    }
+
+    public function show($id){
+        $supplier = Supplier::whereKey($id)->first();
+        $purchases = Purchase::where('supplier_id',$supplier->id)->with('product')->paginate(25);
+        return view('admin.supplier.show',compact('supplier','purchases'));
     }
 
     public function update(Request $request,Supploer $supplier){

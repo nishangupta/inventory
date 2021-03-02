@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Products</h1>
+          <h1>Supplier</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{route('product.index')}}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{{route('supplier.index')}}">Supplier</a></li>
             <li class="breadcrumb-item active">Show</li>
           </ol>
         </div>
@@ -27,8 +27,9 @@
         <div class="col-12">
           <div class="card card-outline card-primary">
             <div class="card-header">
-              <h3 class="card-title">{{$product->name}}</h3>
+              <h3 class="card-title">{{$supplier->name}}</h3>
             </div>
+                      
             <!-- /.card-header -->
             <div class="card-body">
               <x-input-error />
@@ -36,41 +37,71 @@
               <div class="row">
                 <div class="col-12 col-md-6">
                   <div class="mb-3">
-                    <p>Description: {!!$product->description!!}</p>
-                  </div>
-                  <hr>
-
-                  <div class="mb-3">
-                    <p>Price: {{$product->price}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Discount: {{$product->discount}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Created at: {{$product->created_at}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Updated at:{{$product->updated_at}}</p>
+                    <p>Email: {{$supplier->email}}</p>
                   </div>
 
-                  <div class="d-flex">
-                    <a href="{{route('product.edit',$product)}}" class="btn btn-info mr-3">Edit</a>
-                    <form action="{{route('product.destroy',$product)}}" method="POST">
-                      @csrf @method('delete')
-                      <button type="submit" class="dltBtn btn btn-danger">Delete</button>
-                    </form>
+                  <div class="mb-3">
+                    <p>Phone: {{$supplier->phone}}</p>
                   </div>
-                  
+
+                  <div class="mb-3">
+                    <p>Address: {{$supplier->address}}</p>
+                  </div>
+
                 </div>
 
                 <div class="col-12 col-md-6">
-              </div>
-            
+                  <div class="mb-3">
+                    <p>Created at: {{$supplier->created_at}}</p>
+                  </div>
+
+                  <div class="mb-3">
+                    <p>Updated at:{{$supplier->updated_at}}</p>
+                  </div>
+
+                  <div class="d-flex">
+                    <a href="{{route('supplier.edit',$supplier)}}" class="btn btn-info btn-sm mr-3">Edit supplier</a>
+                    <form action="{{route('supplier.destroy',$supplier)}}" method="POST">
+                      @csrf @method('delete')
+                      <button type="submit" class="dltBtn btn btn-danger btn-sm">Delete Supplier</button>
+                    </form>
+                  </div>
+                </div>
             </div>
-            <!-- /.card-body -->
+
+            <hr>
+
+            <h4>All purchases</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sn</th>
+                    <th>Product</th>
+                    <th>Cost Price</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                    <th>Created at</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse($purchases as $purchase)
+                    <tr>
+                      <td>{{$purchase->id}}</td>
+                      <td><a href="{{route('product.show',$purchase->product->id)}}">{{$purchase->product->title}}</a></td>
+                      <td>{{$purchase->cost_price}}</td>
+                      <td>{{$purchase->qty}}</td>
+                      <td>{{$purchase->cost_price*$purchase->qty}}</td>
+                      <td>{{$purchase->updated_at}}</td>
+                    </tr>
+                  @empty
+                    <td>No Purchases Available</td>
+                  @endforelse
+                </tbody>
+              </table>
+            </div>
+            {{$purchases->links()}}
+
           </div>
         </div>
         <!-- /.col -->

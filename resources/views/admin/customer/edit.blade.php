@@ -37,26 +37,36 @@
               <form action="{{route('customer.update',$customer)}}" method="POST" enctype="multipart/form-data">
                 @csrf @method('Put')
                 
-                <div class="form-group">
-                  <label for="" >Name*</label>
-                  <input type="text" name="name" placeholder="name" value="{{$customer->name??old('name')}}" class="form-control" required autofocus>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Name*</label>
+                      <input type="text" name="name" placeholder="name" value="{{$customer->name??old('name')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Email</label>
+                      <input type="email" name="email" placeholder="email" value="{{$customer->email??old('email')}}" class="form-control">
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="" >Email</label>
-                  <input type="email" name="email" placeholder="email" value="{{$customer->email??old('email')}}" class="form-control">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Phone (optional)</label>
+                      <input type="text" name="phone" placeholder="phone" value="{{$customer->phone??old('phone')}}" class="form-control" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Address (optional)</label>
+                      <input type="text" name="address" placeholder="address " value="{{$customer->address??old('address')}}" class="form-control" >
+                    </div>
+                  </div>
                 </div>
-                
-                <div class="my-2">
-                  <label for="">Phone (optional)</label>
-                  <input type="text" name="phone" placeholder="phone" value="{{$customer->phone??old('phone')}}" class="form-control" >
-                </div>
-
-                <div class="my-2">
-                  <label for="">Address (optional)</label>
-                  <input type="text" name="address" placeholder="address " value="{{$customer->address??old('address')}}" class="form-control" >
-                </div>
-                
+              
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
               </form>
             </div>

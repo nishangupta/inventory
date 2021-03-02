@@ -28,6 +28,7 @@
           <div class="card card-outline card-primary">
             <div class="card-header">
               <h3 class="card-title">Update Admin</h3>
+              <a href="{{route('usermanagement.index')}}" class="btn btn-primary btn-sm float-right">Go back</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body text-muted">
@@ -35,31 +36,55 @@
 
               <form action="{{route('usermanagement.update',$user->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf @method('put')
-                <div class="form-group">
-                  <label for="">Name</label>
-                  <input type="text" name="name" placeholder="name" value="{{$user->name??old('name')}}" class="form-control" required autofocus>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Name</label>
+                      <input type="text" name="name" placeholder="name" value="{{$user->name??old('name')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Email</label>
+                      <input type="email" name="email" placeholder="email" value="{{$user->email??old('email')}}" class="form-control" >
+                    </div>
+                  </div>
+    
                 </div>
 
-                <div class="form-group">
-                  <label for="" >Email</label>
-                  <input type="email" name="email" placeholder="email" value="{{$user->email??old('email')}}" class="form-control" >
-                </div>
-                
-                <div class="my-2">
-                  <label for="">Password</label>
-                  <input type="password" name="password" placeholder="password" class="form-control">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Password</label>
+                      <input type="password" name="password" placeholder="password" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="">Select a role</label>
+                    <select name="role" class="form-control">
+                      @foreach($roles as $role)
+                      <option value="{{$role->name}}" {{$role->id == $userRole->id?'selected':''}}>{{$role->name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
                 </div>
 
-                <div class="my-2">
-                  <label for="">Phone (optional)</label>
-                  <input type="text" name="phone" placeholder="phone" value="{{$user->phone??old('phone')}}" class="form-control" >
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Phone (optional)</label>
+                      <input type="text" name="phone" placeholder="phone" value="{{$user->phone??old('phone')}}" class="form-control" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Address (optional)</label>
+                      <input type="text" name="address" value="{{$user->address??old('address')}}" placeholder="address" class="form-control" >
+                    </div>
+                  </div>
                 </div>
-
-                <div class="my-2">
-                  <label for="">Address (optional)</label>
-                  <input type="text" name="address" value="{{$user->address??old('address')}}" placeholder="address" class="form-control" >
-                </div>
-                
+              
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
               </form>
             </div>

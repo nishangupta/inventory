@@ -16,7 +16,7 @@ class SupplierSeeder extends Seeder
     {
         $items = [
             [
-              'name' => 'Bk traders',
+              'name' => 'traders',
             ],
             [
               'name' => 'Test Supplier',

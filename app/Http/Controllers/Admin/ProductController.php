@@ -41,7 +41,10 @@ class ProductController extends Controller
             default:
                 $price = $request->cost_price + $request->margin;
         }
-        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
+
+        if($request->tax_type == 'excluded'){
+            $price += (13 / 100) * $request->cost_price; //adding 13 percent tax in cost price
+        }
 
         $product = Product::create([
             'title'=>$request->title,
@@ -51,7 +54,8 @@ class ProductController extends Controller
             'product_category_id'=>$request->product_category_id,
             'qty'=>$request->qty,
             'type'=>$request->type,
-            'margin'=>$request->margin
+            'margin'=>$request->margin,
+            'tax_type'=>$request->tax_type,
         ]);
 
         return redirect()->route('product.show',$product->id)->with('success','Product created!');
@@ -95,7 +99,9 @@ class ProductController extends Controller
                 $price = $request->cost_price + $request->margin;
         }
 
-        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
+        if($request->tax_type == 'excluded'){
+            $price += (13 / 100) * $request->cost_price; //adding 13 percent tax in cost price
+        }
 
         $product->update([
             'title'=>$request->title,
@@ -105,7 +111,8 @@ class ProductController extends Controller
             'product_category_id'=>$request->product_category_id,
             'qty'=>$request->qty,
             'type'=>$request->type,
-            'margin'=>$request->margin
+            'margin'=>$request->margin,
+            'tax_type'=>$request->tax_type,
         ]);
         
         return redirect(route('product.index'))->with('success','Product updated!');

@@ -103,18 +103,7 @@
                                               <input type="number" name='sub_total'  value="{{$quotation->sub_total}}" placeholder='0.00' class="form-control" id="sub_total" readonly />
                                           </div>
                                       </div>
-                                      <div class="form-group row">
-                                          <label class="col-form-label col-md-2">Tax</label>
-                                          <div class="col-md-10">
-                                              <input type="number" readonly name='tax_rate' value="{{$quotation->tax_rate}}" class="form-control" id="tax" placeholder="0">
-                                          </div>
-                                      </div>
-                                      <div class="form-group row">
-                                          <label class="col-form-label col-md-2">Tax Amount</label>
-                                          <div class="col-md-10">
-                                              <input type="number" name='tax_amount' id="tax_amount"  value="{{$quotation->tax_amount}}" placeholder='0.00' class="form-control" readonly />
-                                          </div>
-                                      </div>
+                                      
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Discount</label>
                                           <div class="col-md-10">
@@ -127,6 +116,18 @@
                                               <input type="number" name='discount_amount' id="discount_amount" value="{{$quotation->discount_amount}}"  placeholder='0.00' class="form-control" readonly />
                                           </div>
                                       </div>
+                                      <div class="form-group row">
+                                        <label class="col-form-label col-md-2">Tax</label>
+                                        <div class="col-md-10">
+                                            <input type="number" name='tax_rate' value="{{$quotation->tax_rate}}" class="form-control" id="tax" placeholder="0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-2">Tax Amount</label>
+                                        <div class="col-md-10">
+                                            <input type="number" name='tax_amount' id="tax_amount"  value="{{$quotation->tax_amount}}" placeholder='0.00' class="form-control" readonly />
+                                        </div>
+                                    </div>
                                       <div class="form-group row">
                                           <label class="col-form-label col-md-2">Grand Total</label>
                                           <div class="col-md-10">
@@ -299,7 +300,7 @@ function calc_total() {
   });
   $('#sub_total').val(total.toFixed(2));
   discount_sum = total / 100 * $('#discount').val();
-  tax_sum = total / 100 * $('#tax').val();
+  tax_sum = (total-discount_sum) / 100 * $('#tax').val();
   $('#tax_amount').val(tax_sum.toFixed(2));
   $('#discount_amount').val(discount_sum.toFixed(2));
   $('#total_amount').val((tax_sum + total - discount_sum).toFixed(2));

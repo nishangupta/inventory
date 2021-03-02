@@ -46,7 +46,7 @@ class AdminPasswordController extends Controller
             if ($user->hasRole('admin')) {
                 return redirect()->route('admin-password.index')->with('info','Password changed');
             } else {
-                return redirect()->intended(route('user.index'));
+                return redirect()->intended(route('admin-password.index'))->with('info','Password changed');
             }
         }
         return redirect()->back();

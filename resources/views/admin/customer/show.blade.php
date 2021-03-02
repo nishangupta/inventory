@@ -102,6 +102,7 @@
                       <td>{{$sale->payment_type}}</td>
                       <td>{{$sale->updated_at}}</td>
                       <td>
+                        <a href="{{route('sale.show',$sale->id)}}" class="btn btn-sm btn-primary float-left">Show</a>
                         <a href="{{route('sale.edit',$sale->id)}}" class="btn btn-sm btn-info float-left">Edit</a>
                       </td>
                     </tr>

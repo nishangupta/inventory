@@ -45,27 +45,15 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="" >Cost Price</label>
-                      <input type="text" name="cost_price" placeholder="Cost Price" value="{{old('cost_price')}}"  required class="form-control" >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                      <label for="" >Type</label>
-                      <select name="type" class="form-control" id="">
-                        <option value="fixed">Fixed</option>
-                        <option value="percent">Percent</option>
+                      <label for="" >Product Category</label>
+    
+                      <select name="product_category_id" class="form-control">
+                        @foreach($categories as $category)
+                          <option value="{{$category->id}}">{{$category->title}}</option>
+                        @endforeach
                       </select>
                     </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                      <label for="">Margin Value</label>
-                      <input type="text" name="margin" placeholder="margin" value="{{old('margin')}}" required class="form-control" >
-                    </div>
+                    
                   </div>
                 </div>
 
@@ -78,13 +66,45 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="" >Product Category</label>
-    
-                      <select name="product_category_id" class="form-control">
-                        @foreach($categories as $category)
-                          <option value="{{$category->id}}">{{$category->title}}</option>
-                        @endforeach
+                      <label for="" >Cost Price</label>
+                      <input type="text" name="cost_price" placeholder="Cost Price" value="{{old('cost_price')}}"  required class="form-control" >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Tax type</label>
+                      
+                      <select name="tax_type" class="form-control">
+                        <option value="included">Included</option>
+                        <option value="excluded">Excluded</option>
                       </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Minumun stock alert</label>
+                      <input type="text" name="minimum" placeholder="Minimum stock" value="{{old('minimum')}}" required  class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="" >Margin Type</label>
+                      <select name="type" class="form-control" id="">
+                        <option value="fixed">Fixed</option>
+                        <option value="percent">Percent</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="">Margin Value</label>
+                      <input type="text" name="margin" placeholder="margin" value="{{old('margin')}}" required class="form-control" >
                     </div>
                   </div>
                 </div>

@@ -2,34 +2,58 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PurchaseController extends Controller
 {
     public function index(){
-        $purchases = Purchase::all();
+        $purchases = Purchase::with('product')->latest()->get();
         return view('admin.purchase.index',compact('purchases'));
     }
 
     public function create(){
-        return view('admin.purchase.create');
+        $products = Product::all();
+        $suppliers = Supplier::all();
+        return view('admin.purchase.create',compact('products','suppliers'));
     }
 
     public function store(Request $request){
         $request->validate([
-            'title'=>'required|min:3',
+            'cost_price'=>'required',
+            'qty'=>'required|integer',
             'description'=>'nullable',
-            'price'=>'required',
+            'product_id'=>'required',
+            'supplier_id'=>'required'
         ]);
 
         $purchase = Purchase::create([
-            'title'=>$request->title,
+            'cost_price'=>$request->cost_price,
+            'product_id'=>$request->product_id,
+            'supplier_id'=>$request->supplier_id,
+            'qty'=>$request->qty,
             'description'=>$request->description,
-            'price'=>$request->price,
-            'customer_id'=>1,
         ]);
+
+        $product = Product::whereKey($request->product_id)->first();
+        $product->cost_price = $request->cost_price;
+        
+        switch($product->type){
+            case "percent":
+                $price = $request->cost_price + ($product->margin / 100) * $request->cost_price;
+                break;
+
+            default:
+                $price = $request->cost_price + $product->margin;
+        }
+        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
+        
+        $product->price = $price;
+        $product->save();
+        $product->increment('qty',$request->qty);
 
         return redirect()->route('purchase.index')->with('success','Purchase created!');
     }
@@ -38,27 +62,6 @@ class PurchaseController extends Controller
         return view('admin.purchase.show',compact('purchase'));
     }
 
-    public function edit(Purchase $purchase){
-        return view('admin.purchase.edit',compact('purchase'));
-    }
-
-    public function update(Request $request,Purchase $purchase){
-        $request->validate([
-            'title'=>'required|min:3',
-            'description'=>'nullable',
-            'price'=>'required',
-            'customer_id'=>1,
-        ]);
-
-        $product->update([
-            'title'=>$request->title,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'customer_id'=>1,
-        ]);
-        
-        return redirect(route('purchase.index'))->with('success','Purchase updated!');
-    }
     
     public function destroy(Purchase $purchase){
         $purchase->delete();

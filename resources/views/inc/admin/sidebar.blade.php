@@ -143,6 +143,54 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
+            <i class="nav-icon far fas fa-shopping-cart"></i>
+            <p>
+              Purchase
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('purchase.create')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('purchase.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Manage</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fas fa-cash-register"></i>
+            <p>
+              Income
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('income.create')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('income.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Manage</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="nav-icon far fas fa-shipping-fast"></i>
             <p>
               Suppliers
@@ -222,12 +270,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            @role('admin')
             <li class="nav-item">
               <a href="{{route('usermanagement.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>User Management</p>
               </a>
             </li>
+            @endrole
             <li class="nav-item">
               <a href="{{route('admin-password.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

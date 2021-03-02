@@ -57,17 +57,3 @@
   <!-- /.content -->
 </div>
 @endsection
-
-@push('css')
-<link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
-@endpush
-
-@push('js')
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<script>
- $(function () {
-    // Summernote
-    $('.textarea').summernote()
-  })
-</script>
-@endpush

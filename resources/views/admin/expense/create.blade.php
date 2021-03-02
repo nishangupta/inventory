@@ -35,16 +35,22 @@
 
               <form action="{{route('expense.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                  <label for="" >Title</label>
-                  <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                  <label for="" >Price</label>
-                  <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
-                </div>
 
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Title</label>
+                      <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Price</label>
+                      <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
+                    </div>
+                  </div>
+                <div>
+            
                 <div class="form-group">
                   <label for="" >Expense Category</label>
                   <select name="category_id" class="form-control">

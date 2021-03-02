@@ -37,26 +37,36 @@
               <form action="{{route('customer.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
-                <div class="form-group">
-                  <label for="" >Name*</label>
-                  <input type="text" name="name" placeholder="name" value="{{old('name')}}" class="form-control" required autofocus>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Name*</label>
+                      <input type="text" name="name" placeholder="name" value="{{old('name')}}" class="form-control" required autofocus>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Email</label>
+                      <input type="email" name="email" placeholder="email" value="{{old('email')}}" class="form-control" >
+                    </div>
+                  </div>
                 </div>
-
-                <div class="form-group">
-                  <label for="" >Email</label>
-                  <input type="email" name="email" placeholder="email" value="{{old('email')}}" class="form-control" >
-                </div>
-                
-                <div class="my-2">
-                  <label for="">Phone</label>
-                  <input type="text" name="phone" placeholder="phone" class="form-control" >
-                </div>
-
-                <div class="my-2">
-                  <label for="">Address</label>
-                  <input type="text" name="address" placeholder="address" class="form-control" >
-                </div>
-                
+              
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Phone</label>
+                      <input type="text" name="phone" placeholder="phone" class="form-control" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="my-2">
+                      <label for="">Address</label>
+                      <input type="text" name="address" placeholder="address" class="form-control" >
+                    </div>
+                  </div>
+                </div>  
+             
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
               </form>
             </div>

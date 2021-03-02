@@ -6,18 +6,24 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role:admin');
+    }
+
     public function index(){
-        $users = User::role('admin')->paginate(25);
+        $users = User::paginate(25);
         return view('admin.usermanagement.index',compact('users'));
     }
 
     public function create(){
-        return view('admin.usermanagement.create');
+        $roles = Role::all();
+        return view('admin.usermanagement.create',compact('roles'));
     }
 
     public function store(Request $request){
@@ -30,6 +36,7 @@ class UserManagementController extends Controller
                 'max:255',
                 'unique:users'
             ],
+            'role'=>'required',
         ]);    
         
         DB::transaction(function () use ($request) {
@@ -41,7 +48,7 @@ class UserManagementController extends Controller
                 'address'=>$request->address,
             ]);
 
-            $user->assignRole('admin');
+            $user->assignRole($request->role);
 
         }, 5);
 
@@ -49,8 +56,10 @@ class UserManagementController extends Controller
     }
 
     public function edit($id){
-        $user = User::whereKey($id)->role('admin')->first(); 
-        return view('admin.usermanagement.edit',compact('user'));
+        $user = User::whereKey($id)->first(); 
+        $userRole = $user->roles->first();
+        $roles = Role::all();
+        return view('admin.usermanagement.edit',compact('user','roles','userRole'));
     }
 
     public function update(Request $request,$id){
@@ -58,7 +67,9 @@ class UserManagementController extends Controller
         
         $request->validate([
             'name' => 'required|min:3',
-            'email' => ['required','string','email','max:255','unique:users,email,'.$id
+            'email' => ['required','string','email','max:255','unique:users,email,'.$id,
+            'password'=>'required',
+            'role'=>'required',
             ],
         ]);    
         
@@ -70,6 +81,9 @@ class UserManagementController extends Controller
                 'phone'=>$request->phone,
                 'address'=>$request->address,
             ]);
+            
+            $user->roles()->detach();
+            $user->assignRole($request->role);
         }, 5);
 
         return redirect(route('usermanagement.index'))->with('success','User/Admin updated');

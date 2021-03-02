@@ -35,21 +35,48 @@
 
               <form action="{{route('purchase.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                  <label for="" >Title</label>
-                  <input type="text" name="title" placeholder="title" value="{{old('title')}}" class="form-control" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                  <label for="" >Price</label>
-                  <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Product</label>
+                      <select name="product_id" class="form-control" id="selectProduct">
+                        @foreach ($products as $product)
+                          <option value="{{$product->id}}">{{$product->title}} ----- Cost Price Rs{{$product->cost_price}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Supplier</label>
+                      <select name="supplier_id" class="form-control" id="selectSupplier">
+                        @foreach ($suppliers as $s)
+                          <option value="{{$s->id}}">{{$s->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
-                <br>
-                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Cost Price</label>
+                      <input type="text" name="cost_price" placeholder="Cost price" value="{{old('cost_price')}}" required class="form-control" >
+                    </div>
+                  </div>   
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">Qty</label>
+                      <input type="text" name="qty" placeholder="Qty" value="{{old('qty')}}" required class="form-control" >
+                    </div>
+                  </div>   
+                </div>
+
                 <div class="form-group">
-                  <label for="">Description</label>
-                  <textarea class="textarea form-control" name="description" placeholder="Short Description here">{{ old('description')}}</textarea>
+                  <label for="">Description (optional)</label>
+                  <textarea class="form-control" name="description" placeholder="Short Description here">{{ old('description')}}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
@@ -70,15 +97,21 @@
 @endsection
 
 @push('css')
-<link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 @endpush
 
 @push('js')
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 <script>
  $(function () {
-    // Summernote
-    $('.textarea').summernote()
+
+    $('#selectProduct').selectize({
+        sortField: 'text'
+    });
+    $('#selectSupplier').selectize({
+        sortField: 'text'
+    });
+
   })
 </script>
 @endpush

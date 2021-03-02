@@ -43,6 +43,10 @@
                   <div class="mb-3">
                     <p>Price: {{number_format($expense->price)}}</p>
                   </div>
+
+                  <div class="mb-3">
+                    <p>Category: {{$expense->category->title}}</p>
+                  </div>
     
                   <div class="mb-3">
                     <p>Created at: {{$expense->created_at}}</p>

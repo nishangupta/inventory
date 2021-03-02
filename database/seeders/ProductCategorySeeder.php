@@ -19,7 +19,10 @@ class ProductCategorySeeder extends Seeder
               'title' => 'Battery',
             ],
             [
-              'title' => 'Category2',
+              'title' => 'Tyres',
+            ],
+            [
+              'title' => 'Other',
             ],
           ];
       

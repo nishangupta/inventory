@@ -32,10 +32,12 @@ class ProductSeeder extends Seeder
               'product_category_id'=>1,
               'title' => $item['title'],
               'cost_price'=>'5000',
-              'price'=>'5750',
+              'price'=>'5100',
               'qty'=>'100',
               'type'=>'fixed',
               'margin'=>'100',
+              'tax_type'=>'included',
+              'minimum'=>'10',
               'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. ex.'
             ]);
           }

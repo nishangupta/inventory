@@ -43,7 +43,7 @@
                   <th>Qty</th>
                   <th>Cost Price</th>
                   <th>Type/Margin</th>
-                  <th>Unit Price</th>
+                  <th>Sale Price</th>
                   <th>Created at</th>
                   <th>Actions</th>
                 </tr>
