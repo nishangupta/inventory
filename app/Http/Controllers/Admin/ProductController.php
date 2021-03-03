@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::with('productCategory')->get();
+        $products = Product::with('productCategory')->latest()->get();
         return view('admin.product.index',compact('products'));
     }
 

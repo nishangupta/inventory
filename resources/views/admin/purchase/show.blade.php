@@ -55,7 +55,6 @@
                   </ul>
 
                   <div class="d-flex mt-4">
-                    <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-info mr-3">Edit</a>
                     <form action="{{route('purchase.destroy',$purchase)}}" method="POST">
                       @csrf @method('delete')
                       <button type="submit" class="dltBtn btn btn-danger">Delete</button>

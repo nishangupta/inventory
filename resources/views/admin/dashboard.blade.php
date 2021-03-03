@@ -25,16 +25,16 @@
   <section class="content">
     <div class="container-fluid">
       <div class="btn-group mb-3">
-        <a href="{{route('admin.index')}}" class="btn {{request()->q == ''?'btn-info':'btn-secondary'}}">Today</a>
-        <a href="{{route('admin.index',['q'=>'monthly'])}}" class="btn {{request()->q == 'monthly'?'btn-info':'btn-secondary'}}">This Month</a>
-        <a href="{{route('admin.index',['q'=>'yearly'])}}" class="btn {{request()->q == 'yearly'?'btn-info':'btn-secondary'}}">This Year</a>
+        <a href="{{route('admin.index')}}" class="btn {{request()->q == ''?'btn-primary':'btn-secondary'}}">Today</a>
+        <a href="{{route('admin.index',['q'=>'monthly'])}}" class="btn {{request()->q == 'monthly'?'btn-primary':'btn-secondary'}}">This Month</a>
+        <a href="{{route('admin.index',['q'=>'yearly'])}}" class="btn {{request()->q == 'yearly'?'btn-primary':'btn-secondary'}}">This Year</a>
       </div>
 
 
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-info">
+          <div class="small-box bg-primary">
             <div class="inner">
               <h4>Rs {{number_format($totalSales)}}</h4>
 
@@ -86,12 +86,12 @@
             <div class="icon">
               <i class="fas fa-money-bill-wave"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('summary.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
       </div>
-      
+
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box shadow-hover">
@@ -107,7 +107,6 @@
             </div>
           </div>
         </div>
-        
         
         <div class="col-12 col-sm-6 col-md-3">
           <div class="info-box shadow-hover">

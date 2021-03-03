@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class QuotationController extends Controller
 {
     public function index(){
-        $quotations = Quotation::with('customer')->get();
+        $quotations = Quotation::with('customer')->latest()->get();
         return view('admin.quotation.index',compact('quotations'));
     }
 

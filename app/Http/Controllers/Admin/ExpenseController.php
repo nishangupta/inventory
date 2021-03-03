@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class ExpenseController extends Controller
 {
     public function index(){
-        $expenses = Expense::with('category')->get();
+        $expenses = Expense::with('category')->latest()->get();
         return view('admin.expense.index',compact('expenses'));
     }
 

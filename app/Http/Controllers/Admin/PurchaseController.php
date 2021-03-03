@@ -50,7 +50,10 @@ class PurchaseController extends Controller
             default:
                 $price = $request->cost_price + $product->margin;
         }
-        $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
+
+        if($product->tax_type == 'excluded'){
+            $price += (13 / 100) * $request->cost_price; //adding 13 percent tax in cost price
+        }
         
         $product->price = $price;
         $product->qty +=$request->qty;

@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 class SaleController extends Controller
 {
     public function index(){
-        $sales = Sale::with('customer')->get();
+        $sales = Sale::with('customer')->latest()->get();
         return view('admin.sale.index',compact('sales'));
     }
 

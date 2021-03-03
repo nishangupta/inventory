@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\IncomeController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SummaryController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PurchaseController;
@@ -29,7 +30,8 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin|staff']],func
   Route::resource('/category',CategoryController::class);
   
   Route::resource('/supplier',SupplierController::class);
-
+  
+  Route::resource('/summary',SummaryController::class);
   
   Route::resource('/product-category',ProductCategoryController::class);
   

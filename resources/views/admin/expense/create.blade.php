@@ -49,17 +49,19 @@
                       <input type="text" name="price" placeholder="Price" value="{{old('price')}}" class="form-control" >
                     </div>
                   </div>
-                <div>
             
-                <div class="form-group">
-                  <label for="" >Expense Category</label>
-                  <select name="category_id" class="form-control">
-                    @foreach($categories as $category)
-                    <option value="{{$category->id}}">{{$category->title}}</option>
-                    @endforeach
-                  </select>
-                </div>
-                
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="" >Expense Category</label>
+                      <select name="category_id" class="form-control">
+                        @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->title}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                <div>
+               
                 <br>
                 
                 <div class="form-group">

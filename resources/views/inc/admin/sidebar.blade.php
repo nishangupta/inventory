@@ -10,7 +10,7 @@
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="{{asset(auth()->user()->avatar??'img/default_user.jpg')}}"
+        <img src="'img/default_user.jpg')"
           onerror="this.onerror=null; this.src='https://ui-avatars.com/api?name={{auth()->user()->name}}'"
           class="img-circle elevation-2" alt="">
       </div>
@@ -22,7 +22,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{{route('admin.index')}}" class="nav-link">
+          <a href="{{route('admin.index')}}" class="nav-link {{request()->segment(2) == ''?'active':''}}">
             <i class="nav-icon fas fa-th"></i>
             <p>
               Dashboard
@@ -30,8 +30,8 @@
           </a>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'product'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'product'?'active':''}}">
             <i class="nav-icon far fas fa-cubes"></i>
             <p>
               Products
@@ -62,8 +62,8 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'sale'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'sale'?'active':''}}">
             <i class="nav-icon far fas fa-donate"></i>
             <p>
               Sales
@@ -86,8 +86,8 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'expense'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'expense'?'active':''}}">
             <i class="nav-icon far fas fa-credit-card"></i>
             <p>
               Expenses
@@ -117,11 +117,11 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'purchase'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'purchase'?'active':''}}">
             <i class="nav-icon far fas fa-shopping-cart"></i>
             <p>
-              Purchases
+              Purchase
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -141,11 +141,11 @@
           </ul>
         </li>
         
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'income'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'income'?'active':''}}">
             <i class="nav-icon far fas fa-cash-register"></i>
             <p>
-              Incomes
+              Income
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -165,8 +165,8 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'customer'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'customer'?'active':''}}">
             <i class="nav-icon far fas fa-user-friends"></i>
             <p>
               Customers
@@ -189,8 +189,8 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'supplier'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'supplier'?'active':''}}">
             <i class="nav-icon far fas fa-shipping-fast"></i>
             <p>
               Suppliers
@@ -213,8 +213,8 @@
           </ul>
         </li>
 
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'quotation'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'quotation'?'active':''}}">
             <i class="nav-icon far fas fa-envelope"></i>
             <p>
               Quotations
@@ -237,8 +237,8 @@
           </ul>
         </li>
         
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{request()->segment(2) == 'setting'?'menu-open':''}}">
+          <a href="#" class="nav-link {{request()->segment(2) == 'setting'?'active':''}}">
             <i class="nav-icon far fas fa-cog"></i>
             <p>
               Settings

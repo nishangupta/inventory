@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class IncomeController extends Controller
 {
     public function index(){
-        $incomes = Income::get();
+        $incomes = Income::latest()->get();
         return view('admin.income.index',compact('incomes'));
     }
 
