@@ -110,7 +110,7 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>Rs.{{number_format($quotation->sub_total)}}</td>
+                        <td>{{number_format($quotation->sub_total)}}</td>
                       </tr>
                       <tr>
                         <th>Discount:</th>

@@ -20,30 +20,38 @@ use App\Http\Controllers\Admin\ProductCategoryController;
 Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin|staff']],function(){
   
   Route::get('/',[AdminController::class,'index'])->name('admin.index');
+  Route::get('/filter',[AdminController::class,'filter'])->name('admin.filter');
+
   Route::resource('/usermanagement',UserManagementController::class);
 
+  Route::resource('/customer',CustomerController::class);
+
+  Route::resource('/category',CategoryController::class);
+  
+  Route::resource('/supplier',SupplierController::class);
+
+  
   Route::resource('/product-category',ProductCategoryController::class);
   
   Route::get('/product/search',[ProductController::class,'search'])->name('product.search');
   Route::resource('/product',ProductController::class);
-  
-  Route::resource('/customer',CustomerController::class);
 
-  Route::resource('/purchase',PurchaseController::class);
-
-  Route::resource('/supplier',SupplierController::class);
-
-  Route::resource('/sale',SaleController::class);
+  Route::get('/sale/filter',[SaleController::class,'filter'])->name('sale.filter');
   Route::get('/sale/printInvoice/{id}',[SaleController::class,'printInvoice'])->name('sale.printInvoice');
+  Route::resource('/sale',SaleController::class);
 
+  Route::get('/quotation/filter',[QuotationController::class,'filter'])->name('quotation.filter');
   Route::resource('/quotation',QuotationController::class);
   Route::get('/quotation/printInvoice/{id}',[QuotationController::class,'printInvoice'])->name('quotation.printInvoice');
   Route::get('/quotation/mail/{id}',[QuotationController::class,'mail'])->name('quotation.mail');
 
-  Route::resource('/category',CategoryController::class);
+  Route::get('/purchase/filter',[PurchaseController::class,'filter'])->name('purchase.filter');
+  Route::resource('/purchase',PurchaseController::class);
 
+  Route::get('/expense/filter',[ExpenseController::class,'filter'])->name('expense.filter');
   Route::resource('/expense',ExpenseController::class);
-
+  
+  Route::get('/income/filter',[IncomeController::class,'filter'])->name('income.filter');
   Route::resource('/income',IncomeController::class);
 
   Route::post('/setting/upload',[SettingController::class,'upload'])->name('setting.upload');

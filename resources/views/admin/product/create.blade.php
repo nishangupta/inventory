@@ -79,7 +79,7 @@
                       
                       <select name="tax_type" class="form-control">
                         <option value="included">Included</option>
-                        <option value="excluded">Excluded</option>
+                        <option value="excluded">Excluded [adds 13%]</option>
                       </select>
                     </div>
                   </div>

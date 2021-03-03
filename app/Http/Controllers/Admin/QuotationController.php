@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Quotation;
 use App\Mail\QuotationMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\QuotationProduct;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -23,8 +24,6 @@ class QuotationController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());
-        
         $request->validate([
             'qty.*'=>'required|gt:0',
             'customer_id'=>'required',
@@ -94,13 +93,6 @@ class QuotationController extends Controller
 
         Mail::to($quotation->customer)->send(new QuotationMail($renderedData));
         return redirect()->route('quotation.show',$id)->with('success','Mail successfully sent');
-
-        // view()->share('quotation',$quotation);
-        // // dd($quotation);
-
-        // $pdf = PDF::loadView('admin.quotation.invoice');
-        // return $pdf->download('invoice.pdf');
-        
     }
 
     public function edit($quotation){
@@ -172,5 +164,19 @@ class QuotationController extends Controller
     public function destroy(Quotation $quotation){
         $quotation->delete();
         return redirect()->route('quotation.index')->with('success','Quotation deleted');
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $quotations = Quotation::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $quotations = Quotation::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.quotation.filter',compact('quotations'));
     }
 }

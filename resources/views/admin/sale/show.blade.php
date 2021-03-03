@@ -119,7 +119,7 @@
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>Rs.{{number_format($sale->sub_total)}}</td>
+                        <td>{{number_format($sale->sub_total)}}</td>
                       </tr>
                       <tr>
                         <th>Discount:</th>

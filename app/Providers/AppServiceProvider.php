@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use App\Models\Setting;
+use App\Observers\ProductObserver;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -46,5 +48,7 @@ class AppServiceProvider extends ServiceProvider
         });   
 
         Paginator::useBootstrap();
+
+        Product::observe(ProductObserver::class);
     }
 }

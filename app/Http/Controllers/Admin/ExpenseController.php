@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class ExpenseController extends Controller
@@ -67,5 +68,19 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense){
         $expense->delete();
         return redirect()->route('expense.index')->with('success','expense deleted');
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $expenses = Expense::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $expenses = Expense::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.expense.filter',compact('expenses'));
     }
 }

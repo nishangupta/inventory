@@ -38,28 +38,34 @@
                  
                   <ul class="list-group">
                     <li class="list-group-item">
-                      <p class="h5">Total Units/Qty: {{$product->qty}}</p>
+                      <p class="h6">Total Units/Qty: {{$product->qty}}</p>
                     </li>
                     <li class="list-group-item">
-                      <p class="h5 text-danger">Alert/Minimum stock: {{$product->minimum}}</p>
+                      <p class="h6 text-danger">Alert/Minimum stock: {{$product->minimum}}</p>
                     </li>
                     <li class="list-group-item">
-                      <p class="h5">Cost Price: {{number_format($product->cost_price)}}</p>
+                      <p class="h6">Cost Price: {{$product->cost_price}}</p>
                     </li>
                     <li class="list-group-item">
-                      <p class="h5">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
+                      <p class="h6">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
                     </li>
                     <li class="list-group-item">
-                      <p class="h5">Selling Price: {{$product->price}}</p>
+                      <p class="h6">Selling Price: {{$product->price}}</p>
                     </li>
-
                   </ul>
-                  
+
+                  <div class="d-flex mt-4">
+                    <a href="{{route('product.edit',$product)}}" class="btn btn-info mr-3">Edit</a>
+                    <form action="{{route('product.destroy',$product)}}" method="POST">
+                      @csrf @method('delete')
+                      <button type="submit" class="dltBtn btn btn-danger">Delete</button>
+                    </form>
+                  </div>
                 </div>
 
                 <div class="col-12 col-md-6">
                   <div class="mb-3">
-                    <p class="">Description: {!!$product->description!!}</p>
+                    <p class="h6">Description: {!!$product->description!!}</p>
                   </div>
                   <hr>
                   <div class="mb-3">
@@ -70,13 +76,7 @@
                     <p class="">Updated at:{{$product->updated_at}}</p>
                   </div>
 
-                  <div class="d-flex">
-                    <a href="{{route('product.edit',$product)}}" class="btn btn-info mr-3">Edit</a>
-                    <form action="{{route('product.destroy',$product)}}" method="POST">
-                      @csrf @method('delete')
-                      <button type="submit" class="dltBtn btn btn-danger">Delete</button>
-                    </form>
-                  </div>
+                
               </div>
             
             </div>

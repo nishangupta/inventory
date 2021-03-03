@@ -36,23 +36,25 @@
               <div class="row">
                 <div class="col-12 col-md-6">
 
-                  <div class="mb-3">
-                    <p>Price: {{$purchase->cost_price}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Unit/Quantity: {{$purchase->qty}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Created at: {{$purchase->created_at}}</p>
-                  </div>
-    
-                  <div class="mb-3">
-                    <p>Updated at:{{$purchase->updated_at}}</p>
-                  </div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <p class="h6">Price: {{$purchase->cost_price}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h6 text-danger">Unit/Quantity: {{$purchase->qty}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h6">description: {{$purchase->description}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h6">Created at: {{$purchase->created_at}}</p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h6">Updated at:{{$purchase->updated_at}}</p>
+                    </li>
+                  </ul>
 
-                  <div class="d-flex">
+                  <div class="d-flex mt-4">
                     <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-info mr-3">Edit</a>
                     <form action="{{route('purchase.destroy',$purchase)}}" method="POST">
                       @csrf @method('delete')
@@ -63,13 +65,15 @@
                 </div>
 
                 <div class="col-12 col-md-6">
-                  <div class="mb-3">
-                    <p class="h5">Product: <a href="{{route('product.show',$purchase->product->id)}}">{{$purchase->product->title}}</a></p>
-                  </div>
-
-                  <div class="mb-3">
-                    <p class="h5">Supplier: <a href="{{route('supplier.show',$purchase->supplier->id)}}">{{$purchase->supplier->name}}</a></p>
-                  </div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <p class="h6">Product: 
+                        <a href="{{route('product.show',$purchase->product->id)}}">{{$purchase->product->title}}<a></p>
+                    </li>
+                    <li class="list-group-item">
+                      <p class="h6">Supplier: <a href="{{route('supplier.show',$purchase->supplier->id)}}">{{$purchase->supplier->name}}</p>
+                    </li>
+                  </ul>
               </div>
             
             </div>

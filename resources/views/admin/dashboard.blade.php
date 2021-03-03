@@ -15,6 +15,7 @@
             <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
+          
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -23,6 +24,12 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
+      <div class="btn-group mb-3">
+        <a href="{{route('admin.index')}}" class="btn {{request()->q == ''?'btn-info':'btn-secondary'}}">Today</a>
+        <a href="{{route('admin.index',['q'=>'monthly'])}}" class="btn {{request()->q == 'monthly'?'btn-info':'btn-secondary'}}">This Month</a>
+        <a href="{{route('admin.index',['q'=>'yearly'])}}" class="btn {{request()->q == 'yearly'?'btn-info':'btn-secondary'}}">This Year</a>
+      </div>
+
 
       <div class="row">
         <div class="col-lg-3 col-6">
@@ -50,7 +57,7 @@
             <div class="icon">
               <i class="fas fa-user-friends"></i>
             </div>
-            <a href="{{route('sale.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('income.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -147,6 +154,51 @@
         </div>
       </div>
 
+      <br>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="card card-outline card-danger">
+            <div class="card-header">
+              <p class="card-title">Low in Stock</p>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                  </button>
+                </div>
+            </div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Current Stock</th>
+                    <th>Minimum Stock</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse($lowStocks as $p)
+                  @php $s = $p->product @endphp
+                  <tr>
+                    <td><a href="{{route('product.show',$s->id)}}">{{$s->title}}</a></td>
+                    <td class="text-danger">{{$s->qty}}</td>
+                    <td>{{$s->minimum}}</td>
+                    <td><a href="{{route('product.edit',1)}}" class="btn btn-sm btn-info">Edit</a></td>
+                  </tr>
+                  @empty
+                  <tr>
+                    <td>No products in low qty</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  @endforelse
+                </tbody>
+              </table>
+          </div>
+    
+        </div>
+      </div>
+   
     </div>
     <!--/. container-fluid -->
   </section>

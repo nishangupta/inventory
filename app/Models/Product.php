@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\StockAlert;
 use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,5 +19,9 @@ class Product extends Model
 
     public function productCategory(){
         return $this->belongsTo(ProductCategory::class);
+    }
+
+    public function stockAlert(){
+        return $this->hasOne(StockAlert::class);
     }
 }

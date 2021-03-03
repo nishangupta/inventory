@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class PurchaseController extends Controller
@@ -52,8 +53,8 @@ class PurchaseController extends Controller
         $price += (13 / 100) * $request->cost_price; //adding 13 percent tax
         
         $product->price = $price;
+        $product->qty +=$request->qty;
         $product->save();
-        $product->increment('qty',$request->qty);
 
         return redirect()->route('purchase.index')->with('success','Purchase created!');
     }
@@ -62,10 +63,23 @@ class PurchaseController extends Controller
         return view('admin.purchase.show',compact('purchase'));
     }
 
-    
     public function destroy(Purchase $purchase){
         $purchase->delete();
         return redirect()->route('purchase.index')->with('success','Purchase deleted');
 
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $purchases = Purchase::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $purchases = Purchase::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.purchase.filter',compact('purchases'));
     }
 }

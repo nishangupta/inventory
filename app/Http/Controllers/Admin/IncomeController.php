@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Income;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class IncomeController extends Controller
@@ -60,5 +61,19 @@ class IncomeController extends Controller
     public function destroy(Income $income){
         $income->delete();
         return redirect()->route('income.index')->with('success','income deleted');
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $incomes = Income::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $incomes = Income::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.income.filter',compact('incomes'));
     }
 }

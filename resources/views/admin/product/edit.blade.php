@@ -80,7 +80,7 @@
                       
                       <select name="tax_type" class="form-control">
                         <option value="included" {{$product->tax_type == 'included'?'selected':''}}>Included</option>
-                        <option value="excluded" {{$product->tax_type == 'excluded'?'selected':''}}>Excluded</option>
+                        <option value="excluded" {{$product->tax_type == 'excluded'?'selected':''}}>Excluded [adds 13%]</option>
                       </select>
                     </div>
                   </div>

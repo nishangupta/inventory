@@ -10,10 +10,7 @@
           <h1>Sale</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item active">Sale</li>
-          </ol>
+          <a href="{{route('sale.filter')}}" class="btn btn-secondary btn-sm float-right">Filter by date</a>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -27,6 +24,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Sale</h3>
+
               <a href="{{route('sale.create')}}" class="btn btn-primary btn-sm float-right">Create</a>
             </div>
             <!-- /.card-header -->
@@ -68,7 +66,6 @@
                   @endforeach
                 </tbody>
               </table>
-              {{-- {{$countries->links()}} --}}
             </div>
             <!-- /.card-body -->
           </div>
@@ -84,12 +81,16 @@
 @endsection
 
 @push('css')
+<link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+
 <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endpush
 
 @push('js')
-<!-- DataTables -->
+<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -97,6 +98,8 @@
 <script>
   
   $(function () {
+    $('#datePicker').daterangepicker()
+
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,

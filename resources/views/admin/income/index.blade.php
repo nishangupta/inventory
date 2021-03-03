@@ -10,10 +10,7 @@
           <h1>Incomes</h1>
         </div>
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-            <li class="breadcrumb-item active">Incomes</li>
-          </ol>
+          <a href="{{route('income.filter')}}" class="btn btn-secondary btn-sm float-right">Filter by date</a>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -62,7 +59,6 @@
                   @endforeach
                 </tbody>
               </table>
-              {{-- {{$countries->links()}} --}}
             </div>
             <!-- /.card-body -->
           </div>

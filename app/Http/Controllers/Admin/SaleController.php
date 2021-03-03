@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\SaleProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -81,7 +82,11 @@ class SaleController extends Controller
                         'total' => $request->total[$key],
                     ]);
 
-                    DB::table('products')->where('title', $request->title[$key])->decrement('qty', $request->qty[$key]);
+                    $product = Product::where('title', $request->title[$key])->first();
+                    $product->update([
+                        'qty'=>$product->qty - $request->qty[$key]
+                    ]);
+                    // DB::table('products')->where('title', $request->title[$key])->decrement('qty', $request->qty[$key]);
                 }
             }
         }
@@ -92,11 +97,6 @@ class SaleController extends Controller
     public function show($sale){
         $sale = Sale::whereKey($sale)->with('customer','saleProducts')->first();
         return view('admin.sale.show',compact('sale'));
-    }
-
-    public function printInvoice($id){
-        $sale = Sale::whereKey($id)->with('customer','saleProducts')->first();
-        return view('admin.sale.invoice',compact('sale'));
     }
 
     public function edit($sale){
@@ -148,7 +148,10 @@ class SaleController extends Controller
         $sale = Sale::whereKey($sale)->with('saleProducts')->first();   
 
         foreach($sale->saleProducts as $p){
-            DB::table('products')->where('title', $p->title)->increment('qty', $p->qty);
+            $product = Product::where('title', $p->title)->first();
+            $product->update([
+                'qty'=>$product->qty + $p->qty,
+            ]);
 
             $p->delete(); //deleting old relationship
         }
@@ -171,7 +174,10 @@ class SaleController extends Controller
                         'total' => $request->total[$key],
                     ]);
 
-                    DB::table('products')->where('title', $request->title[$key])->decrement('qty', $request->qty[$key]);
+                    $product = Product::where('title', $request->title[$key])->first();
+                    $product->update([
+                        'qty'=>$product->qty - $request->qty[$key]
+                    ]);
                 }
             }
         }
@@ -183,4 +189,25 @@ class SaleController extends Controller
         $sale->delete();
         return redirect()->route('sale.index')->with('success','Sale deleted');
     }
+
+    
+    public function printInvoice($id){
+        $sale = Sale::whereKey($id)->with('customer','saleProducts')->first();
+        return view('admin.sale.invoice',compact('sale'));
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $sales = Sale::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $sales = Sale::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.sale.filter',compact('sales'));
+    }
+    
 }

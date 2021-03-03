@@ -5,7 +5,7 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="{{route('home.index')}}" class="nav-link">Home</a>
+      <a href="{{route('admin.index')}}" class="nav-link">Dashboard</a>
     </li>
   </ul>
 
@@ -30,9 +30,10 @@
         <span class="badge badge-danger navbar-badge">{{$notiCount}}</span>
       </a>
     </li> --}}
-    
+  
+
     <li class="nav-item" >
-        <a href="{{route('account.logout')}}" title="Logout" class="nav-link"><i class="fas fa-power-off"></i></a>
+        <a  href="#" data-toggle="modal" data-target="#logoutModal" title="Logout" class="nav-link"><i class="fas fa-power-off"></i></a>
     </li>
 
   </ul>

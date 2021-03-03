@@ -55,7 +55,7 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->phone}}</td>
                     <td>{{$user->address}}</td>
-                    <td>{{$user->getRoleNames()}}</td>
+                    <td>{{$user->roles->first()->name}}</td>
                     <td>{{$user->created_at->format('d M Y')}}</td>
                     <td>
                       @if($user->id == 1)

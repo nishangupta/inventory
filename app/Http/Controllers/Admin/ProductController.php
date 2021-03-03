@@ -21,13 +21,14 @@ class ProductController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'title'=>'required|min:3',
+            'title'=>'required|min:3|unique:products',
             'description'=>'nullable',
             'cost_price'=>'required',
             'product_category_id'=>'required',
             'qty'=>'required',
             'type'=>'required',
             'margin'=>'required',
+            'minimum'=>'required',
         ]);
 
         switch($request->type){
@@ -56,6 +57,7 @@ class ProductController extends Controller
             'type'=>$request->type,
             'margin'=>$request->margin,
             'tax_type'=>$request->tax_type,
+            'minimum'=>$request->minimum,
         ]);
 
         return redirect()->route('product.show',$product->id)->with('success','Product created!');
@@ -78,13 +80,14 @@ class ProductController extends Controller
 
     public function update(Request $request,Product $product){
         $request->validate([
-            'title'=>'required|min:3',
+            'title'=>'required|min:3|unique:products,title,'.$product->id,
             'description'=>'nullable',
             'cost_price'=>'required',
             'product_category_id'=>'required',
             'qty'=>'required',
             'type'=>'required',
-            'margin'=>'required'
+            'margin'=>'required',
+            'minimum'=>'required',
         ]);
 
         switch($request->type){
@@ -113,6 +116,7 @@ class ProductController extends Controller
             'type'=>$request->type,
             'margin'=>$request->margin,
             'tax_type'=>$request->tax_type,
+            'minimum'=>$request->minimum,
         ]);
         
         return redirect(route('product.index'))->with('success','Product updated!');
