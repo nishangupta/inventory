@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if(!Cache::has('settings')){
-            Cache::remember('settings',7200,function(){
+            Cache::rememberForever('settings',10800,function(){
                 return DB::table('settings')->get();
             });
         }
