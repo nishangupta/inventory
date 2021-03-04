@@ -21,7 +21,6 @@ use App\Http\Controllers\Admin\ProductCategoryController;
 Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin|staff']],function(){
   
   Route::get('/',[AdminController::class,'index'])->name('admin.index');
-  Route::get('/filter',[AdminController::class,'filter'])->name('admin.filter');
 
   Route::resource('/usermanagement',UserManagementController::class);
 

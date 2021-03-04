@@ -44,7 +44,7 @@ class SupplierController extends Controller
         return view('admin.supplier.show',compact('supplier','purchases'));
     }
 
-    public function update(Request $request,Supploer $supplier){
+    public function update(Request $request,Supplier $supplier){
         $request->validate([
             'name' => 'required|min:3',
         ]);    

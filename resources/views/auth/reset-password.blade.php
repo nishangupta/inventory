@@ -3,7 +3,8 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{route('home.index')}}"><b>Reset your password</b></a>
+    <img src="{{asset($LOGO->value)}}" width="80" alt=""> <br>
+    <a href="{{route('home.index')}}"><b>{{$NAME->value??'Reset password'}}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -30,7 +31,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" class="form-control" placeholder="Password" name="password" required autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

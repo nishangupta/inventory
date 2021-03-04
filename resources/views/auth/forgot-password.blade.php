@@ -3,7 +3,8 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{route('home.index')}}"><b>Forgot password</b></a>
+    <img src="{{asset($LOGO->value)}}" width="80" alt=""> <br>
+    <a href="{{route('home.index')}}"><b>{{$NAME->value??'Forgot Password'}}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -19,7 +20,7 @@
       <form action="{{route('password.email')}}" method="post">
         @csrf 
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
+          <input type="email" class="form-control" placeholder="Email" name="email" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

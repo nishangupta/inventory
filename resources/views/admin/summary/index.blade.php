@@ -27,7 +27,7 @@
 
       <div class="row">
         <div class="col-md-6 order-2">
-          <div class="card  card-primary">
+          <div class="card  card-info">
             <div class="card-header">
               <h3 class="card-title">This year summary</h3>
             </div>
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="card  card-primary shadow">
+          <div class="card  card-info shadow">
             <div class="card-header border-0">
               <div class="d-flex justify-content-between">
                 <h3 class="card-title">Sales Details</h3>
@@ -90,7 +90,7 @@
         
               <div class="d-flex flex-row justify-content-end">
                 <span class="mr-2">
-                  <i class="fas fa-square text-primary"></i> This year
+                  <i class="fas fa-square text-info"></i> This year
                 </span>
         
                 <span>
@@ -134,8 +134,8 @@ $(function () {
       labels  : ['JAN','FEB','MAR','APR','MAY','JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
       datasets: [
         {
-          backgroundColor: '#007bff',
-          borderColor    : '#007bff',
+          backgroundColor: '#17A2B8',
+          borderColor    : '#17A2B8',
           data           : {!! json_encode($thisYearSales) !!}
         },
         {

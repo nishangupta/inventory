@@ -1,8 +1,8 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" >
+<aside class="main-sidebar sidebar-dark-info elevation-4" >
   {{-- style="background-color:#1E1E1E;" --}}
   <a href="{{route('admin.index')}}" class="brand-link" >
     <img src="{{asset($LOGO->value??'img/AdminLTELogo.png')}}" alt="" class="brand-image img-circle elevation-3"
-      style="opacity: .8">
+      style="opacity: 1">
     <span class="brand-text font-weight-light">{{$NAME->value??'Inventory'}}</span>
   </a>
 

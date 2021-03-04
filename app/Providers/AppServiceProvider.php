@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        View::composer('admin.*', function ($view) {
+        View::composer('*', function ($view) {
             $settings = cache('settings');
             $view->with([
                 'NAME'=>$settings->where('title','name')->first(),

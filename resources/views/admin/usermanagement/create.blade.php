@@ -52,7 +52,7 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="my-2">
+                    <div class="form-group">
                       <label for="">Password*</label>
                       <input type="password" name="password" placeholder="password" class="form-control" required >
                     </div>

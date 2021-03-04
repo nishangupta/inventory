@@ -3,7 +3,8 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{route('home.index')}}"><b>Login</b></a>
+    <img src="{{asset($LOGO->value)}}" width="80" alt=""> <br>
+    <a href="{{route('home.index')}}"><b>{{$NAME->value??'Login'}}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

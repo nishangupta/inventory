@@ -46,6 +46,7 @@ class AdminController extends Controller
             $revenue = Sale::whereDay('created_at',$day)->whereYear('created_at',$year)->sum('paid_amount');
             $income = Income::whereDay('created_at',$day)->whereYear('created_at',$year)->sum('price');
             $purchase = Purchase::whereDay('created_at',$day)->whereYear('created_at',$year)->sum('cost_price');
+            
         }
         
         $totalIncome = $revenue + $income;

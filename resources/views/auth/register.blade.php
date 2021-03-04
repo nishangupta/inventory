@@ -3,7 +3,8 @@
 @section('content')
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{route('home.index')}}"><b>Register</b></a>
+    <img src="{{asset($LOGO->value)}}" width="80" alt=""> <br>
+    <a href="{{route('home.index')}}"><b>{{$NAME->value??'Register'}}</b></a>
   </div>
 
   <div class="card">

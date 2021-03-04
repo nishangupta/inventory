@@ -43,6 +43,7 @@
                   <th>Qty</th>
                   <th>Cost Price</th>
                   <th>Type/Margin</th>
+                  <th>Tax</th>
                   <th>Sale Price</th>
                   <th>Created at</th>
                   <th>Actions</th>
@@ -57,6 +58,7 @@
                     <td>{{$product->qty}}</td>
                     <td>{{$product->cost_price}}</td>
                     <td>{{$product->type.' ['.$product->margin.']'}}</td>
+                    <td>{{$product->tax_type == 'excluded'?'13%':''}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->created_at->format('Y m d')}}</td>
                     <td>

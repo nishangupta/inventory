@@ -36,6 +36,7 @@ class UserManagementController extends Controller
                 'max:255',
                 'unique:users'
             ],
+            'password'=>'required|min:6',
             'role'=>'required',
         ]);    
         
@@ -67,17 +68,25 @@ class UserManagementController extends Controller
         
         $request->validate([
             'name' => 'required|min:3',
-            'email' => ['required','string','email','max:255','unique:users,email,'.$id,
-            'password'=>'required',
+            'email' => ['required','string','email','max:255','unique:users,email,'.$id],
             'role'=>'required',
-            ],
         ]);    
-        
-        DB::transaction(function () use ($request,$user) {
+            
+        if($request->password != ''){
+            $request->validate([
+                'password'=>'min:6'
+            ]);
+
+            $password =Hash::make($request->password);
+        }else{
+            $password = $user->password;
+        }
+
+        DB::transaction(function () use ($request,$user,$password) {
             $user->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=>Hash::make($request->password),
+                'password'=>$password,
                 'phone'=>$request->phone,
                 'address'=>$request->address,
             ]);
@@ -91,7 +100,7 @@ class UserManagementController extends Controller
 
 
     public function destroy($id){
-        $user = User::whereKey($id)->role('admin')->first(); 
+        $user = User::whereKey($id)->first(); 
         $user->delete();
         return redirect()->route('usermanagement.index')->with('success','User/Admin Deleted');
     }

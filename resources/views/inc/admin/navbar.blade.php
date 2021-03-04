@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand  navbar-dark">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -30,7 +30,6 @@
         <span class="badge badge-danger navbar-badge">{{$notiCount}}</span>
       </a>
     </li> --}}
-  
 
     <li class="nav-item" >
         <a  href="#" data-toggle="modal" data-target="#logoutModal" title="Logout" class="nav-link"><i class="fas fa-power-off"></i></a>
