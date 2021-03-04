@@ -83,6 +83,6 @@ class PurchaseController extends Controller
             $purchases = Purchase::whereDay('created_at',Carbon::today())->get();
         }
         
-        return view('admin.purchase.filter',compact('purchases'));
+        return view('admin.purchase.index',compact('purchases'));
     }
 }

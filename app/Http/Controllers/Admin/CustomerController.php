@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Sale;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -70,5 +71,19 @@ class CustomerController extends Controller
     public function destroy(Customer $customer){
         $customer->delete();
         return redirect()->route('customer.index')->with('success','Customer Deleted');
+    }
+
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $customers = Customer::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $customers = Customer::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.customer.index',compact('customers'));
     }
 }

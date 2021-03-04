@@ -44,6 +44,9 @@
                       <p class="h6 text-danger">Alert/Minimum stock: {{$product->minimum}}</p>
                     </li>
                     <li class="list-group-item">
+                      <p class="h6">Tax type: {{$product->tax_type}}</p>
+                    </li>
+                    <li class="list-group-item">
                       <p class="h6">Cost Price: {{$product->cost_price}}</p>
                     </li>
                     <li class="list-group-item">

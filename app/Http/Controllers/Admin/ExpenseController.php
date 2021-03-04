@@ -81,6 +81,6 @@ class ExpenseController extends Controller
             $expenses = Expense::whereDay('created_at',Carbon::today())->get();
         }
         
-        return view('admin.expense.filter',compact('expenses'));
+        return view('admin.expense.index',compact('expenses'));
     }
 }

@@ -37,7 +37,7 @@
                 @csrf @method('patch')
                 <div class="form-group">
                   <label for="">Title</label>
-                  <input type="text" name="title" placeholder="Title" value="{{$setting->title??old('title')}}" class="form-control" required autofocus>
+                  <input type="text" name="title" readonly placeholder="Title" value="{{$setting->title??old('title')}}" class="form-control" required autofocus>
                 </div>
 
                 <div class="form-group">

@@ -1,7 +1,8 @@
 <aside class="main-sidebar sidebar-dark-info elevation-4" >
   {{-- style="background-color:#1E1E1E;" --}}
   <a href="{{route('admin.index')}}" class="brand-link" >
-    <img src="{{asset($LOGO->value??'img/AdminLTELogo.png')}}" alt="" class="brand-image img-circle elevation-3"
+    <img src="{{asset($LOGO->value??'img/AdminLTELogo.png')}}"
+    alt="" class="brand-image img-circle elevation-3"
       style="opacity: 1">
     <span class="brand-text font-weight-light">{{$NAME->value??'Inventory'}}</span>
   </a>
@@ -10,8 +11,7 @@
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="'img/default_user.jpg')"
-          onerror="this.onerror=null; this.src='https://ui-avatars.com/api?name={{auth()->user()->name}}'"
+        <img src="https://ui-avatars.com/api?name={{auth()->user()->name}}"
           class="img-circle elevation-2" alt="">
       </div>
       <div class="info">

@@ -74,6 +74,6 @@ class IncomeController extends Controller
             $incomes = Income::whereDay('created_at',Carbon::today())->get();
         }
         
-        return view('admin.income.filter',compact('incomes'));
+        return view('admin.income.index',compact('incomes'));
     }
 }

@@ -53,7 +53,7 @@
                   <th>Incomes</th>
                   <th>{{number_format($income)}}</th>
                 </tr>
-                <tr>
+                <tr class="table-primary">
                   <th>Profit</th>
                   <th>{{number_format($revenue+$income-$totalExpense-$purchase)}}</th>
                 </tr>

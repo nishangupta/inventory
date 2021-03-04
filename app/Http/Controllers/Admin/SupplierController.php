@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class SupplierController extends Controller
@@ -63,5 +64,19 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier){
         $supplier->delete();
         return redirect()->route('supplier.index')->with('success','Supplier Deleted');
+    }
+    
+    public function filter(Request $request){
+        if($request->datepicker){
+            $data = explode('-',$request->datepicker);
+            $start = Carbon::parse($data[0]);
+            $end = Carbon::parse($data[1]);
+            
+            $suppliers = Supplier::whereBetween('created_at',[$start,$end])->get();
+        }else{
+            $suppliers = Supplier::whereDay('created_at',Carbon::today())->get();
+        }
+        
+        return view('admin.supplier.index',compact('suppliers'));
     }
 }

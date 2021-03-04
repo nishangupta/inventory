@@ -24,10 +24,12 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','role:admin|staff']],func
 
   Route::resource('/usermanagement',UserManagementController::class);
 
+  Route::get('/customer/filter',[CustomerController::class,'filter'])->name('customer.filter');
   Route::resource('/customer',CustomerController::class);
 
-  Route::resource('/category',CategoryController::class);
+  Route::resource('/category',CategoryController::class); //expense category
   
+  Route::get('/supplier/filter',[SupplierController::class,'filter'])->name('supplier.filter');
   Route::resource('/supplier',SupplierController::class);
   
   Route::resource('/summary',SummaryController::class);

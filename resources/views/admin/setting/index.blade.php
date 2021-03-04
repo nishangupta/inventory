@@ -142,7 +142,7 @@
       "paging": false,
       "searching": true,
     });
-
+    
     $('.dltBtn').click(function(e){
       e.preventDefault()
 

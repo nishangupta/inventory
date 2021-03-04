@@ -46,6 +46,31 @@ class SettingController extends Controller
         return view('admin.setting.edit',compact('setting'));
     }
 
+    public function update(Request $request,Setting $setting){
+        $request->validate([
+            'title'=>'required|min:3',
+            'value'=>'required',
+        ]);
+
+        $setting->update([
+            'title'=>$request->title,
+            'value'=>$request->value,
+        ]);
+
+        cache()->forget('settings');
+        
+        return redirect(route('setting.index'))->with('success','Setting updated!');
+    }
+    
+    public function destroy(Setting $setting){
+        $setting->delete();
+
+        cache()->forget('settings');
+
+        return redirect()->route('setting.index')->with('success','Setting deleted');
+
+    }
+
     public function upload(Request $request){   
         $request->validate([
             'logo'=>'required|image'
@@ -84,30 +109,4 @@ class SettingController extends Controller
 
         return redirect()->route('setting.index')->with('success','Logo updated');
     }
-
-    public function update(Request $request,Setting $setting){
-        $request->validate([
-            'title'=>'required|min:3',
-            'value'=>'required',
-        ]);
-
-        $setting->update([
-            'title'=>$request->title,
-            'value'=>$request->value,
-        ]);
-
-        cache()->forget('settings');
-        
-        return redirect(route('setting.index'))->with('success','Setting updated!');
-    }
-    
-    public function destroy(Setting $setting){
-        $setting->delete();
-
-        cache()->forget('settings');
-
-        return redirect()->route('setting.index')->with('success','Setting deleted');
-
-    }
-
 }

@@ -207,7 +207,7 @@ class SaleController extends Controller
             $sales = Sale::whereDay('created_at',Carbon::today())->get();
         }
         
-        return view('admin.sale.filter',compact('sales'));
+        return view('admin.sale.index',compact('sales'));
     }
     
 }
