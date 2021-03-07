@@ -89,9 +89,9 @@
                     <tr>
                       <td>{{$purchase->id}}</td>
                       <td><a href="{{route('product.show',$purchase->product->id)}}">{{$purchase->product->title}}</a></td>
-                      <td>{{$purchase->cost_price}}</td>
+                      <td>{{number_format($purchase->cost_price)}}</td>
                       <td>{{$purchase->qty}}</td>
-                      <td>{{$purchase->cost_price*$purchase->qty}}</td>
+                      <td>{{number_format($purchase->cost_price*$purchase->qty)}}</td>
                       <td>{{$purchase->updated_at}}</td>
                     </tr>
                   @empty

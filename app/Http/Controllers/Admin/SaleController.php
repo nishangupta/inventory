@@ -30,16 +30,9 @@ class SaleController extends Controller
             'details'=>'nullable',
             'discount_amount'=>'max:191',
             'payment_type'=>'required',
-            'chq_no'=>'',
-            'chq_date'=>'',
+            'chq_no'=>'required_if:payment_type,bank',
+            'chq_date'=>'required_if:payment_type,bank',
         ]);
-
-        if($request->payment_type == 'bank'){    
-            $request->validate([
-                'chq_no'=>'required',
-                'chq_date'=>'required',
-            ]);
-        }
 
         if($request->paid_amount>0){
             $status = 1;
@@ -112,16 +105,11 @@ class SaleController extends Controller
             'details'=>'nullable',
             'customer_id'=>'required',
             'discount_amount'=>'max:191',
-            'payment_type'=>'required'
+            'payment_type'=>'required',
+            'chq_no'=>'required_if:payment_type,bank',
+            'chq_date'=>'required_if:payment_type,bank',
         ]);
-
-        if($request->payment_type == 'bank'){    
-            $request->validate([
-                'chq_no'=>'required',
-                'chq_date'=>'required',
-            ]);
-        }
-        
+       
         if($request->paid_amount>0){
             $status = 1;
         }else{

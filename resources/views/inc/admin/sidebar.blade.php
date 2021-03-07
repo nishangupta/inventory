@@ -20,7 +20,7 @@
     </div>
     
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-pills nav-sidebar nav-flat flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{route('admin.index')}}" class="nav-link {{request()->segment(2) == ''?'active':''}}">
             <i class="nav-icon fas fa-th"></i>

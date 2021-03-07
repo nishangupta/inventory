@@ -96,9 +96,9 @@
                       <td>{{$sale->id}}</td>
                       <td>{{$sale->details??'-----'}}</td>
                       <td>{{$sale->sale_products_count}}</td>
-                      <td>{{$sale->total_amount}}</td>
-                      <td>{{$sale->paid_amount}}</td>
-                      <td>{{$sale->due_amount}}</td>
+                      <td>{{number_format($sale->total_amount)}}</td>
+                      <td>{{number_format($sale->paid_amount)}}</td>
+                      <td>{{number_format($sale->due_amount)}}</td>
                       <td>{{$sale->payment_type}}</td>
                       <td>{{$sale->updated_at}}</td>
                       <td>

@@ -33,6 +33,11 @@ class ProductCategoryController extends Controller
         return view('admin.product-category.edit',compact('productCategory'));
     }
 
+    public function show(ProductCategory $productCategory){
+        $products = $productCategory->products()->latest()->paginate(15);
+        return view('admin.product-category.show',compact('productCategory','products'));
+    }
+
     public function update(Request $request,ProductCategory $productCategory){
         $request->validate([
             'title'=>'required|min:3',

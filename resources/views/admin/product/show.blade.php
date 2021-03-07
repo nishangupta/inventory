@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Products</h1>
+          <h1>Product</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -50,7 +50,7 @@
                       <p class="h6">Cost Price: {{$product->cost_price}}</p>
                     </li>
                     <li class="list-group-item">
-                      <p class="h6">Type/Margin: {{$product->type}} [{{$product->margin}}]</p>
+                      <p class="h6">Margin/Type: {{strtoupper($product->type)}} [{{$product->margin}}]</p>
                     </li>
                     <li class="list-group-item">
                       <p class="h6">Selling Price: {{$product->price}}</p>
@@ -67,6 +67,10 @@
                 </div>
 
                 <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <p class="h6">Category: <a href="{{route('product-category.show',$product->productCategory->id)}}">{{$product->productCategory->title}}</a></p>
+                  </div>
+                  <hr>                  
                   <div class="mb-3">
                     <p class="h6">Description: {!!$product->description!!}</p>
                   </div>

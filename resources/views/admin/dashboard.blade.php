@@ -155,11 +155,11 @@
 
       <br>
 
-      <div class="row">
+      <div class="row text-sm">
         <div class="col-12 col-md-6">
           <div class="card card-outline card-danger">
-            <div class="card-header">
-              <p class="card-title">Low in Stock</p>
+            <div class="card-header ">
+              <p class="card-title text-sm">Low in Stock</p>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
                   </button>

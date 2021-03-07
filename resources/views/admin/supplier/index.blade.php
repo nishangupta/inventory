@@ -54,7 +54,7 @@
                   @foreach($suppliers as $supplier)
                   <tr>
                     <td>{{$supplier->id}}</td>
-                    <td>{{$supplier->name}}</td>
+                    <td><a href="{{route('supplier.show',$supplier->id)}}">{{$supplier->name}}</a></td>
                     <td>{{$supplier->email}}</td>
                     <td>{{$supplier->phone}}</td>
                     <td>{{$supplier->address}}</td>

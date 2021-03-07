@@ -63,7 +63,8 @@ class ProductController extends Controller
         return redirect()->route('product.show',$product->id)->with('success','Product created!');
     }
     
-    public function show(Product $product){
+    public function show($product){
+        $product = Product::whereKey($product)->with('productCategory')->first();
         return view('admin.product.show',compact('product'));
     }
 
