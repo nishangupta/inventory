@@ -177,6 +177,6 @@ class QuotationController extends Controller
             $quotations = Quotation::whereDay('created_at',Carbon::today())->get();
         }
         
-        return view('admin.quotation.filter',compact('quotations'));
+        return view('admin.quotation.index',compact('quotations'));
     }
 }
