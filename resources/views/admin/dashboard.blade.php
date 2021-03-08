@@ -169,8 +169,8 @@
                 <thead>
                   <tr>
                     <th>Product</th>
-                    <th>Current Stock</th>
                     <th>Minimum Stock</th>
+                    <th>Current Stock</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -179,8 +179,8 @@
                   @php $s = $p->product @endphp
                   <tr>
                     <td><a href="{{route('product.show',$s->id)}}">{{$s->title}}</a></td>
-                    <td class="text-danger">{{$s->qty}}</td>
                     <td>{{$s->minimum}}</td>
+                    <td class="text-danger">{{$s->qty}}</td>
                     <td><a href="{{route('product.edit',$s->id)}}" class="btn btn-sm btn-info">Edit</a></td>
                   </tr>
                   @empty
